@@ -150,18 +150,18 @@ end;
 
 function TForm2.CreateUrlsList(const AProviderID: string; const AStorage: TBackendStorageApi): TBackendObjectList<TUrls>;
 var
-  LQuery: TArray<string>;
-  LContactList: TBackendObjectList<TUrls>;
+  query: TArray<string>;
+  urlList: TBackendObjectList<TUrls>;
 begin
-  LContactList := TBackendObjectList<TUrls>.Create;
+  urlList := TBackendObjectList<TUrls>.Create;
   try
-    LQuery := TArray<string>.Create(Format('order=%s', ['user']));
-    AStorage.QueryObjects<TUrls>('websites', LQuery, LContactList);
+    query := TArray<string>.Create(Format('order=%s', ['user']));
+    AStorage.QueryObjects<TUrls>('websites', query, urlList);
   except
-    LContactList.Free;
+    urlList.Free;
     raise;
   end;
-  Result := LContactList;
+  Result := urlList;
 end;
 
 procedure TForm2.FormCreate(Sender: TObject);
