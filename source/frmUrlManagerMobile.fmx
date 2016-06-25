@@ -84,8 +84,8 @@ object Form2: TForm2
       ExplicitSize.cy = 49.000000000000000000
       object Panel1: TPanel
         Align = Client
-        Size.Width = 329.000000000000000000
-        Size.Height = 368.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object lblUser: TLabel
@@ -167,17 +167,12 @@ object Form2: TForm2
     AppKey = 'kid_HkaDuTFH'
     AppSecret = '78a3d240526d4440bdf5c9d68403a7dc'
     MasterSecret = '63162143962846459271516e26906ab8'
-    Left = 40
-    Top = 504
-  end
-  object BackendQuery1: TBackendQuery
-    Provider = KinveyProvider1
-    Left = 40
-    Top = 448
+    Left = 152
+    Top = 400
   end
   object BackendStorage1: TBackendStorage
     Provider = KinveyProvider1
-    Left = 40
-    Top = 560
+    Left = 152
+    Top = 456
   end
 end

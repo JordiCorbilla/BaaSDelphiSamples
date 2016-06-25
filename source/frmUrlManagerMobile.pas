@@ -43,7 +43,6 @@ uses
 type
   TForm2 = class(TForm)
     KinveyProvider1: TKinveyProvider;
-    BackendQuery1: TBackendQuery;
     ListView1: TListView;
     BackendStorage1: TBackendStorage;
     btnRefresh: TButton;
