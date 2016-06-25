@@ -30,28 +30,42 @@ unit lib.kinvey.rest;
 interface
 
 uses
-  lib.urls, System.Contnrs, Generics.Collections, IdHTTP, IdIOHandler, IdIOHandlerStream,
+  lib.urls, IdHTTP, IdIOHandler, IdIOHandlerStream,
   IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdGlobal,
-  System.SysUtils, System.Variants, System.Classes;
+  System.SysUtils, System.Variants, System.Classes, lib.options;
 
 type
-  TKinveyRest = class(TObject)
-    class procedure Add(url : IUrls);
-    class function GetUrls() : TList<IUrls>;
+  IKinveyRest = interface
+    function Add(jsonString: string) : boolean;
+    function GetCollection() : string;
+  end;
+
+  TKinveyRest = class(TInterfacedObject, IKinveyRest)
+  private
+    FOptions : IOptions;
+  public
+    function Add(jsonString: string) : boolean;
+    function GetCollection() : string;
+    constructor Create();
+    class function New() : IKinveyRest;
   end;
 
 implementation
 
+uses
+  IdCoderMIME;
+
 { TKinveyRest }
 
-class procedure TKinveyRest.Add(url: IUrls);
+function TKinveyRest.Add(jsonString: string) : boolean;
 var
   IdHTTP: TIdHTTP;
   IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
   response : string;
   JsonToSend: TStringStream;
+  encodedHeader : string;
 begin
-  JsonToSend := TStringStream.Create('{"user":"'+url.User+'","password":"'+url.Password+'","Url":"'+url.Url+'"}');
+  JsonToSend := TStringStream.Create(jsonString);
   try
     IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
     IdIOHandler.ReadTimeout := IdTimeoutInfinite;
@@ -62,12 +76,13 @@ begin
       IdHTTP.Request.Connection := 'Keep-Alive';
       IdIOHandler.SSLOptions.Method := sslvSSLv23;
       IdHTTP.Request.CustomHeaders.Clear;
-      IdHTTP.Request.CustomHeaders.Values['Authorization'] := 'Basic';
+      encodedHeader := TIdEncoderMIME.EncodeString(FOptions.AppId + ':' + FOptions.MasterSecret);
+      IdHTTP.Request.CustomHeaders.Values['Authorization'] := 'Basic ' + encodedHeader;
       IdHTTP.Request.CustomHeaders.Values['X-Kinvey-API-Version'] := '3';
       IdHTTP.Request.ContentType := 'application/json';
-      response := IdHTTP.Post('https://baas.kinvey.com/appdata//websites/', JsonToSend);
+      response := IdHTTP.Post('https://baas.kinvey.com/appdata/'+FOptions.AppId+'/'+FOptions.Collection+'/', JsonToSend);
       response := response.Replace(AnsiChar(#10), '');
-      //result := (response.Contains('createdAt'));
+      result := (response.Contains('creator'));
     finally
       IdHTTP.Free;
     end;
@@ -77,9 +92,45 @@ begin
   end;
 end;
 
-class function TKinveyRest.GetUrls: TList<IUrls>;
+constructor TKinveyRest.Create;
 begin
+  FOptions := TOptions.New.Load;
+end;
 
+function TKinveyRest.GetCollection: string;
+var
+  IdHTTP: TIdHTTP;
+  IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
+  response : string;
+  encodedHeader : string;
+begin
+  try
+    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+    IdIOHandler.ReadTimeout := IdTimeoutInfinite;
+    IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
+    IdHTTP := TIdHTTP.Create(nil);
+    try
+      IdHTTP.IOHandler := IdIOHandler;
+      IdHTTP.Request.Connection := 'Keep-Alive';
+      IdIOHandler.SSLOptions.Method := sslvSSLv23;
+      IdHTTP.Request.CustomHeaders.Clear;
+      encodedHeader := TIdEncoderMIME.EncodeString(FOptions.AppId + ':' + FOptions.MasterSecret);
+      IdHTTP.Request.CustomHeaders.Values['Authorization'] := 'Basic ' + encodedHeader;
+      IdHTTP.Request.CustomHeaders.Values['X-Kinvey-API-Version'] := '3';
+      IdHTTP.Request.ContentType := 'application/json';
+      response := IdHTTP.Get('https://baas.kinvey.com/appdata/'+FOptions.AppId+'/'+FOptions.Collection+'/');
+      result := response;
+    finally
+      IdHTTP.Free;
+    end;
+  finally
+    IdIOHandler.Free;
+  end;
+end;
+
+class function TKinveyRest.New: IKinveyRest;
+begin
+  result := Create;
 end;
 
 end.

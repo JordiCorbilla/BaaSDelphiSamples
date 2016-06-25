@@ -1,9 +1,11 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Url Manager'
-  ClientHeight = 526
-  ClientWidth = 755
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsDialog
+  Caption = 'Url Manager by Jordi Corbilla'
+  ClientHeight = 536
+  ClientWidth = 765
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +13,8 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -34,6 +38,19 @@ object Form1: TForm1
     Height = 13
     Caption = 'Url:'
   end
+  object Label4: TLabel
+    Left = 24
+    Top = 145
+    Width = 63
+    Height = 13
+    Caption = 'Cloud data:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object ListView1: TListView
     Left = 24
     Top = 164
@@ -52,6 +69,8 @@ object Form1: TForm1
         Caption = 'Url'
         Width = 480
       end>
+    GridLines = True
+    RowSelect = True
     TabOrder = 0
     ViewStyle = vsReport
   end
@@ -83,6 +102,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Add'
     TabOrder = 4
+    OnClick = Button1Click
   end
   object Button2: TButton
     Left = 662
@@ -91,5 +111,6 @@ object Form1: TForm1
     Height = 25
     Caption = 'Reload'
     TabOrder = 5
+    OnClick = Button2Click
   end
 end

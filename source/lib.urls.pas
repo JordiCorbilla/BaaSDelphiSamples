@@ -40,6 +40,7 @@ type
     property User : string read GetUser write SetUser;
     property Password : string read GetPasword write SetPassword;
     property Url : string read GetUrl write SetUrl;
+    function ToJsonString() : string;
   end;
 
   TUrls = class(TInterfacedObject, IUrls)
@@ -58,6 +59,7 @@ type
     property Password : string read GetPasword write SetPassword;
     property Url : string read GetUrl write SetUrl;
     Constructor Create(user, password, url : string);
+    function ToJsonString() : string;
   end;
 
 implementation
@@ -99,6 +101,11 @@ end;
 procedure TUrls.SetUser(const Value: string);
 begin
   FUser := Value;
+end;
+
+function TUrls.ToJsonString: string;
+begin
+  result := '{"user":"'+FUser+'","password":"'+FPassword+'","url":"'+FUrl+'"}'
 end;
 
 end.

@@ -44,6 +44,10 @@ type
     edtUrl: TMemo;
     Button1: TButton;
     Button2: TButton;
+    Label4: TLabel;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,6 +59,52 @@ var
 
 implementation
 
+uses
+  lib.urls, lib.kinvey.rest, lib.urls.converter, System.Contnrs, Generics.Collections;
+
 {$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  url : IUrls;
+begin
+  url := TUrls.Create(edtUser.Text, edtPassword.Text, edtUrl.Text);
+  if TKinveyRest.New.Add(url.ToJsonString()) then
+  begin
+    showMessage('Item has been successfully added!');
+    edtUser.Text := '';
+    edtPassword.Text := '';
+    edtUrl.Clear;
+    Button2Click(sender);
+  end
+  else
+    showMessage('There was an error adding the data to the cloud storage');
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+var
+  collection : string;
+  jsonConverter : TUrlConverter;
+  listUrls : TList<IUrls>;
+  url : IUrls;
+  listItem : TListItem;
+begin
+  Listview1.Clear;
+  collection := TKinveyRest.New.GetCollection();
+  jsonConverter := TUrlConverter.Create(collection);
+  listUrls := jsonConverter.GetCollection();
+  for url in listUrls do
+  begin
+    listItem := Listview1.Items.Add;
+    listItem.Caption := url.User;
+    listItem.SubItems.Add(url.Password);
+    listItem.SubItems.Add(url.Url);
+  end;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  Button2Click(sender);
+end;
 
 end.

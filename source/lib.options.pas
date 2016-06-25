@@ -38,20 +38,29 @@ type
     procedure SetMasterSecret(const Value: string);
     function GetAppId() : string;
     function GetMasterSecret() : string;
+    procedure SetCollection(const Value: string);
+    function GetCollection() : string;
     function Load() : IOptions;
+    property AppId : string read GetAppId write SetAppId;
+    property MasterSecret : string read GetMasterSecret write SetMasterSecret;
+    property Collection : string read GetCollection write SetCollection;
   end;
 
   TOptions = class(TInterfacedObject, IOptions)
   private
     FAppId: string;
     FMasterSecret: string;
+    FCollection: string;
     procedure SetAppId(const Value: string);
     procedure SetMasterSecret(const Value: string);
     function GetAppId() : string;
     function GetMasterSecret() : string;
-  published
+    procedure SetCollection(const Value: string);
+    function GetCollection() : string;
+  public
     property AppId : string read GetAppId write SetAppId;
     property MasterSecret : string read GetMasterSecret write SetMasterSecret;
+    property Collection : string read GetCollection write SetCollection;
     class function New(): IOptions;
     function Load() : IOptions;
   end;
@@ -68,6 +77,11 @@ begin
   result := FAppId;
 end;
 
+function TOptions.GetCollection: string;
+begin
+  result := FCollection;
+end;
+
 function TOptions.GetMasterSecret: string;
 begin
   result := FMasterSecret;
@@ -76,12 +90,12 @@ end;
 function TOptions.Load : IOptions;
 var
   inifile : Tinifile;
-  value : string;
 begin
-  inifile := TInifile.Create(ExtractFilePath(ParamStr(0)) + 'FlickrAnalytics.ini');
+  inifile := TInifile.Create(ExtractFilePath(ParamStr(0)) + 'urlManager.ini');
   try
     FAppId := inifile.ReadString('Kinvey', 'AppId', '');
     FMasterSecret := inifile.ReadString('Kinvey', 'MasterSecret', '');
+    FCollection := inifile.ReadString('Kinvey', 'Collection', '');
   finally
     inifile.Free;
   end;
@@ -96,6 +110,11 @@ end;
 procedure TOptions.SetAppId(const Value: string);
 begin
   FAppId := Value;
+end;
+
+procedure TOptions.SetCollection(const Value: string);
+begin
+  FCollection := Value;
 end;
 
 procedure TOptions.SetMasterSecret(const Value: string);
