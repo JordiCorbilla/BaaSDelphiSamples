@@ -9,3 +9,11 @@
 /source/__history
 /source/urlManager.identcache
 /source/urlManager.stat
+/source/Android/Debug/urlManagerMobile/debug/liburlManagerMobile.so
+*.so
+*.apk
+/source/Android/Debug/urlManagerMobile/debug
+/source/Android/Debug/urlManagerMobile/library/lib/armeabi-v7a/gdbserver
+/source/Android/Debug/urlManagerMobile/classes/classes.dex
+*.dcu
+*.o

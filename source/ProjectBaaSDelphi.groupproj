@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{8B13298D-EFE6-4813-AA91-EC97FAD4C8C6}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="urlManager.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="urlManagerMobile.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="urlManager">
+        <MSBuild Projects="urlManager.dproj"/>
+    </Target>
+    <Target Name="urlManager:Clean">
+        <MSBuild Projects="urlManager.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="urlManager:Make">
+        <MSBuild Projects="urlManager.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="urlManagerMobile">
+        <MSBuild Projects="urlManagerMobile.dproj"/>
+    </Target>
+    <Target Name="urlManagerMobile:Clean">
+        <MSBuild Projects="urlManagerMobile.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="urlManagerMobile:Make">
+        <MSBuild Projects="urlManagerMobile.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="urlManager;urlManagerMobile"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="urlManager:Clean;urlManagerMobile:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="urlManager:Make;urlManagerMobile:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

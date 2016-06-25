@@ -1,0 +1,18 @@
+inherited Form2_LgXhdpiPh: TForm2_LgXhdpiPh
+  ClientHeight = 695
+  ClientWidth = 450
+  DesignerMasterStyle = 3
+  inherited TabControl1: TTabControl
+    inherited tabCloud: TTabItem
+      ExplicitSize.cx = 148.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+      inherited ListView1: TListView
+        OnItemClick = ListView1ItemClick
+      end
+    end
+    inherited tabDetails: TTabItem
+      ExplicitSize.cx = 149.000000000000000000
+      ExplicitSize.cy = 49.000000000000000000
+    end
+  end
+end
