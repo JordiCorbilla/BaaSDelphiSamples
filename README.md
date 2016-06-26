@@ -17,5 +17,10 @@ Code samples for **BaaS (Kinvey)** and **PaaS (Parse.com)** using Delphi
 
 ![](https://3.bp.blogspot.com/-aYTpo_Q5MVc/V26ViH6L8FI/AAAAAAAAFiE/QNomSrfWic0ZEeTD8Na6IyzUOuWnzPC5gCLcB/s640/Screenshot_2016-06-25-14-47-29.png)
 
+**Data stored in Kinvey**
+
+![](https://1.bp.blogspot.com/-q6DpnnASkCY/V2-a06zpAfI/AAAAAAAAFiU/6KLybvIw-KsJ9ewDYQIwYy9xUvUGRpFJgCLcB/s640/Kinvey7.png)
+
+
 These can be downloaded here:
   - https://github.com/JordiCorbilla/BaaSDelphiSamples/releases
