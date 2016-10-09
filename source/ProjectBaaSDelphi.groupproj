@@ -12,6 +12,9 @@
         <Projects Include="urlManagerMobile.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="thundax.testproject.dproj">
+            <Dependencies>thundax.baas.providers.dproj</Dependencies>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -47,14 +50,23 @@
     <Target Name="urlManagerMobile:Make">
         <MSBuild Projects="urlManagerMobile.dproj" Targets="Make"/>
     </Target>
+    <Target Name="thundax_testproject" DependsOnTargets="thundax.baas.providers">
+        <MSBuild Projects="thundax.testproject.dproj"/>
+    </Target>
+    <Target Name="thundax_testproject:Clean" DependsOnTargets="thundax.baas.providers:Clean">
+        <MSBuild Projects="thundax.testproject.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="thundax_testproject:Make" DependsOnTargets="thundax.baas.providers:Make">
+        <MSBuild Projects="thundax.testproject.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile"/>
+        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile;thundax_testproject"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean"/>
+        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean;thundax_testproject:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make"/>
+        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make;thundax_testproject:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
