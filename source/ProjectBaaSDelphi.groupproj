@@ -3,8 +3,11 @@
         <ProjectGuid>{8B13298D-EFE6-4813-AA91-EC97FAD4C8C6}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="urlManager.dproj">
+        <Projects Include="thundax.baas.providers.dproj">
             <Dependencies/>
+        </Projects>
+        <Projects Include="urlManager.dproj">
+            <Dependencies>thundax.baas.providers.dproj</Dependencies>
         </Projects>
         <Projects Include="urlManagerMobile.dproj">
             <Dependencies/>
@@ -17,13 +20,22 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="urlManager">
+    <Target Name="thundax_baas_providers">
+        <MSBuild Projects="thundax.baas.providers.dproj"/>
+    </Target>
+    <Target Name="thundax_baas_providers:Clean">
+        <MSBuild Projects="thundax.baas.providers.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="thundax_baas_providers:Make">
+        <MSBuild Projects="thundax.baas.providers.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="urlManager" DependsOnTargets="thundax.baas.providers">
         <MSBuild Projects="urlManager.dproj"/>
     </Target>
-    <Target Name="urlManager:Clean">
+    <Target Name="urlManager:Clean" DependsOnTargets="thundax.baas.providers:Clean">
         <MSBuild Projects="urlManager.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="urlManager:Make">
+    <Target Name="urlManager:Make" DependsOnTargets="thundax.baas.providers:Make">
         <MSBuild Projects="urlManager.dproj" Targets="Make"/>
     </Target>
     <Target Name="urlManagerMobile">
@@ -36,13 +48,13 @@
         <MSBuild Projects="urlManagerMobile.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="urlManager;urlManagerMobile"/>
+        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="urlManager:Clean;urlManagerMobile:Clean"/>
+        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="urlManager:Make;urlManagerMobile:Make"/>
+        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
