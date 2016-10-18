@@ -41,9 +41,12 @@ type
     procedure SetCollection(const Value: string);
     function GetCollection() : string;
     function Load() : IOptions;
+    function GetFirebaseAuth() : string;
+    procedure SetFirebaseAuth(const Value : string);
     property AppId : string read GetAppId write SetAppId;
     property MasterSecret : string read GetMasterSecret write SetMasterSecret;
     property Collection : string read GetCollection write SetCollection;
+    property FirebaseAuth : string read GetFirebaseAuth write SetFirebaseAuth;
   end;
 
   TOptions = class(TInterfacedObject, IOptions)
@@ -51,16 +54,20 @@ type
     FAppId: string;
     FMasterSecret: string;
     FCollection: string;
+    FFirebaseAuth : string;
     procedure SetAppId(const Value: string);
     procedure SetMasterSecret(const Value: string);
     function GetAppId() : string;
     function GetMasterSecret() : string;
     procedure SetCollection(const Value: string);
     function GetCollection() : string;
+    function GetFirebaseAuth() : string;
+    procedure SetFirebaseAuth(const Value : string);
   public
     property AppId : string read GetAppId write SetAppId;
     property MasterSecret : string read GetMasterSecret write SetMasterSecret;
     property Collection : string read GetCollection write SetCollection;
+    property FirebaseAuth : string read GetFirebaseAuth write SetFirebaseAuth;
     class function New(): IOptions;
     function Load() : IOptions;
   end;
@@ -82,6 +89,11 @@ begin
   result := FCollection;
 end;
 
+function TOptions.GetFirebaseAuth: string;
+begin
+  result := FFirebaseAuth;
+end;
+
 function TOptions.GetMasterSecret: string;
 begin
   result := FMasterSecret;
@@ -96,6 +108,7 @@ begin
     FAppId := inifile.ReadString('Kinvey', 'AppId', '');
     FMasterSecret := inifile.ReadString('Kinvey', 'MasterSecret', '');
     FCollection := inifile.ReadString('Kinvey', 'Collection', '');
+    FFirebaseAuth := inifile.ReadString('Firebase', 'Auth', '');
   finally
     inifile.Free;
   end;
@@ -115,6 +128,11 @@ end;
 procedure TOptions.SetCollection(const Value: string);
 begin
   FCollection := Value;
+end;
+
+procedure TOptions.SetFirebaseAuth(const Value: string);
+begin
+  FFirebaseAuth := Value;
 end;
 
 procedure TOptions.SetMasterSecret(const Value: string);

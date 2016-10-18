@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2016/10/09 19:57:59.137,=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
-    <Transaction>2016/10/09 19:58:24.678,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\uFormTest.dfm=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.dfm</Transaction>
-    <Transaction>2016/10/09 19:58:24.678,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\uFormTest.pas=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
-    <Transaction>2016/10/09 19:58:38.058,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\thundax.testproject.dproj=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+	<Transactions>
+    <Transaction>2016/10/09 19:57:59.000.137,=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2016/10/09 19:58:24.000.678,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\uFormTest.dfm=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.dfm</Transaction>
+    <Transaction>2016/10/09 19:58:24.000.678,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\uFormTest.pas=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2016/10/09 19:58:38.000.058,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\thundax.testproject.dproj=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
   </Transactions>
 </BorlandProject>

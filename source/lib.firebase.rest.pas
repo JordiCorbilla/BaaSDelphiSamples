@@ -29,6 +29,75 @@ unit lib.firebase.rest;
 
 interface
 
+uses
+  lib.urls, IdHTTP, IdIOHandler, IdIOHandlerStream,
+  IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdGlobal,
+  System.SysUtils, System.Variants, System.Classes, lib.options;
+
+type
+  IFirebaseRest = interface
+    function Add(jsonString: string) : boolean;
+    function GetCollection() : string;
+  end;
+
+  TFirebaseRest = class(TInterfacedObject, IFirebaseRest)
+  private
+    FOptions : IOptions;
+  public
+    function Add(jsonString: string) : boolean;
+    function GetCollection() : string;
+    constructor Create();
+    class function New() : IFirebaseRest;
+  end;
+
 implementation
+
+uses
+  IdCoderMIME;
+
+{ TFirebaseRest }
+
+function TFirebaseRest.Add(jsonString: string): boolean;
+begin
+
+end;
+
+constructor TFirebaseRest.Create;
+begin
+  FOptions := TOptions.New.Load;
+end;
+
+function TFirebaseRest.GetCollection: string;
+var
+  IdHTTP: TIdHTTP;
+  IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
+  response : string;
+  encodedHeader : string;
+begin
+  try
+    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+    IdIOHandler.ReadTimeout := IdTimeoutInfinite;
+    IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
+    IdHTTP := TIdHTTP.Create(nil);
+    try
+      IdHTTP.IOHandler := IdIOHandler;
+      IdHTTP.Request.Connection := 'Keep-Alive';
+      IdIOHandler.SSLOptions.Method := sslvSSLv23;
+      IdHTTP.Request.CustomHeaders.Clear;
+      IdHTTP.Request.ContentType := 'application/json';
+      response := IdHTTP.Get('https://delphitestproject.firebaseio.com/.json?auth='+FOptions.FirebaseAuth);
+      result := response;
+    finally
+      IdHTTP.Free;
+    end;
+  finally
+    IdIOHandler.Free;
+  end;
+end;
+
+class function TFirebaseRest.New: IFirebaseRest;
+begin
+  result := Create;
+end;
 
 end.

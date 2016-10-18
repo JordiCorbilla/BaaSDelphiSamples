@@ -28,7 +28,10 @@ package thundax.baas.providers;
 {$IMPLICITBUILD ON}
 
 requires
-  rtl;
+  rtl,
+  IndySystem,
+  IndyProtocols,
+  IndyCore;
 
 contains
   lib.kinvey.rest in 'lib.kinvey.rest.pas',
