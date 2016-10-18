@@ -14,8 +14,8 @@ object Form3: TForm3
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 528
-    Top = 40
+    Left = 659
+    Top = 49
     Width = 75
     Height = 25
     Caption = 'Test Firebase'
@@ -30,5 +30,30 @@ object Form3: TForm3
     Lines.Strings = (
       '')
     TabOrder = 1
+  end
+  object Edit1: TEdit
+    Left = 45
+    Top = 53
+    Width = 121
+    Height = 21
+    TabOrder = 2
+    Text = 'Edit1'
+  end
+  object Edit2: TEdit
+    Left = 172
+    Top = 53
+    Width = 121
+    Height = 21
+    TabOrder = 3
+    Text = 'Edit2'
+  end
+  object Button2: TButton
+    Left = 299
+    Top = 49
+    Width = 110
+    Height = 25
+    Caption = 'Add To Firebase'
+    TabOrder = 4
+    OnClick = Button2Click
   end
 end

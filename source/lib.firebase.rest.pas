@@ -58,8 +58,35 @@ uses
 { TFirebaseRest }
 
 function TFirebaseRest.Add(jsonString: string): boolean;
+var
+  IdHTTP: TIdHTTP;
+  IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
+  response : string;
+  JsonToSend: TStringStream;
+  encodedHeader : string;
 begin
-
+  JsonToSend := TStringStream.Create(jsonString);
+  try
+    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+    IdIOHandler.ReadTimeout := IdTimeoutInfinite;
+    IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
+    IdHTTP := TIdHTTP.Create(nil);
+    try
+      IdHTTP.IOHandler := IdIOHandler;
+      IdHTTP.Request.Connection := 'Keep-Alive';
+      IdIOHandler.SSLOptions.Method := sslvSSLv23;
+      IdHTTP.Request.CustomHeaders.Clear;
+      IdHTTP.Request.ContentType := 'application/json';
+      response := IdHTTP.Post('https://delphitestproject.firebaseio.com/.json?auth='+FOptions.FirebaseAuth, JsonToSend);
+      response := response.Replace(AnsiChar(#10), '');
+      result := (response.Contains('name'));
+    finally
+      IdHTTP.Free;
+    end;
+  finally
+    IdIOHandler.Free;
+    JsonToSend.Free;
+  end;
 end;
 
 constructor TFirebaseRest.Create;
