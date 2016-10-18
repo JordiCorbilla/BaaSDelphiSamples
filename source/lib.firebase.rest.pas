@@ -94,6 +94,11 @@ begin
   FOptions := TOptions.New.Load;
 end;
 
+//Sample using curl
+//curl --cacert ca-bundle.crt -X GET -H 'Content-Type: application/json' "https://delphitestproject.firebaseio.com/.json?auth=7NZu878Wr56kWm4dSnVIoX52nd02zIRFsoGs7O1y"
+//curl: (6) Could not resolve host: application
+//{"Process":"Windows"}
+
 function TFirebaseRest.GetCollection: string;
 var
   IdHTTP: TIdHTTP;
