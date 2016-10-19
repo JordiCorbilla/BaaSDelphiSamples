@@ -25,6 +25,40 @@ Code samples for **BaaS (Kinvey)**, **BaaS (Firebase)** and **PaaS (Parse.com)**
 These can be downloaded here:
   - https://github.com/JordiCorbilla/BaaSDelphiSamples/releases
 
+*Example usage:*
+```Delphi
+function TKinveyRest.GetCollection: string;
+var
+  IdHTTP: TIdHTTP;
+  IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
+  response : string;
+  encodedHeader : string;
+begin
+  try
+    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+    IdIOHandler.ReadTimeout := IdTimeoutInfinite;
+    IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
+    IdHTTP := TIdHTTP.Create(nil);
+    try
+      IdHTTP.IOHandler := IdIOHandler;
+      IdHTTP.Request.Connection := 'Keep-Alive';
+      IdIOHandler.SSLOptions.Method := sslvSSLv23;
+      IdHTTP.Request.CustomHeaders.Clear;
+      encodedHeader := TIdEncoderMIME.EncodeString(FOptions.AppId + ':' + FOptions.MasterSecret);
+      IdHTTP.Request.CustomHeaders.Values['Authorization'] := 'Basic ' + encodedHeader;
+      IdHTTP.Request.CustomHeaders.Values['X-Kinvey-API-Version'] := '3';
+      IdHTTP.Request.ContentType := 'application/json';
+      response := IdHTTP.Get('https://baas.kinvey.com/appdata/'+FOptions.AppId+'/'+FOptions.Collection+'/');
+      result := response;
+    finally
+      IdHTTP.Free;
+    end;
+  finally
+    IdIOHandler.Free;
+  end;
+end;
+```
+
 **Licence**
 -------
 
