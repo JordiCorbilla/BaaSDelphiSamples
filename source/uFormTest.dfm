@@ -14,9 +14,9 @@ object Form3: TForm3
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 659
+    Left = 640
     Top = 49
-    Width = 75
+    Width = 94
     Height = 25
     Caption = 'Load Firebase'
     TabOrder = 0
@@ -59,7 +59,7 @@ object Form3: TForm3
     OnClick = Button2Click
   end
   object AddFile: TButton
-    Left = 467
+    Left = 415
     Top = 49
     Width = 110
     Height = 25
@@ -67,8 +67,16 @@ object Form3: TForm3
     TabOrder = 5
     OnClick = AddFileClick
   end
+  object Button3: TButton
+    Left = 559
+    Top = 49
+    Width = 75
+    Height = 25
+    Caption = 'Delete'
+    TabOrder = 6
+    OnClick = Button3Click
+  end
   object OpenDialog1: TOpenDialog
-    Left = 600
-    Top = 8
+    Left = 200
   end
 end

@@ -38,6 +38,7 @@ type
   IFirebaseRest = interface
     function Add(jsonString: string) : boolean;
     function GetCollection() : string;
+    function Delete() : boolean;
   end;
 
   TFirebaseRest = class(TInterfacedObject, IFirebaseRest)
@@ -46,6 +47,7 @@ type
   public
     function Add(jsonString: string) : boolean;
     function GetCollection() : string;
+    function Delete() : boolean;
     constructor Create();
     class function New() : IFirebaseRest;
   end;
@@ -92,6 +94,38 @@ end;
 constructor TFirebaseRest.Create;
 begin
   FOptions := TOptions.New.Load;
+end;
+
+function TFirebaseRest.Delete: boolean;
+var
+  IdHTTP: TIdHTTP;
+  IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
+  response : string;
+  JsonToSend: TStringStream;
+  encodedHeader : string;
+begin
+  JsonToSend := TStringStream.Create('');
+  try
+    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+    IdIOHandler.ReadTimeout := IdTimeoutInfinite;
+    IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
+    IdHTTP := TIdHTTP.Create(nil);
+    try
+      IdHTTP.IOHandler := IdIOHandler;
+      IdHTTP.Request.Connection := 'Keep-Alive';
+      IdIOHandler.SSLOptions.Method := sslvSSLv23;
+      IdHTTP.Request.CustomHeaders.Clear;
+      IdHTTP.Request.ContentType := 'application/json';
+      IdHTTP.Delete('https://delphitestproject.firebaseio.com/.json?auth='+FOptions.FirebaseAuth, JsonToSend);
+      response := response.Replace(AnsiChar(#10), '');
+      result := (response.Contains('name'));
+    finally
+      IdHTTP.Free;
+    end;
+  finally
+    IdIOHandler.Free;
+    JsonToSend.Free;
+  end;
 end;
 
 //Sample using curl

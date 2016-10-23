@@ -42,9 +42,11 @@ type
     Button2: TButton;
     AddFile: TButton;
     OpenDialog1: TOpenDialog;
+    Button3: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure AddFileClick(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -127,6 +129,11 @@ begin
   end
   else
     showMessage('There was an error adding the data to the cloud storage');
+end;
+
+procedure TForm3.Button3Click(Sender: TObject);
+begin
+  TFirebaseRest.New.Delete();
 end;
 
 end.
