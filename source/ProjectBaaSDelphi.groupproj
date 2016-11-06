@@ -15,6 +15,9 @@
         <Projects Include="thundax.testproject.dproj">
             <Dependencies>thundax.baas.providers.dproj</Dependencies>
         </Projects>
+        <Projects Include="thundax.firebase.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +62,23 @@
     <Target Name="thundax_testproject:Make" DependsOnTargets="thundax.baas.providers:Make">
         <MSBuild Projects="thundax.testproject.dproj" Targets="Make"/>
     </Target>
+    <Target Name="thundax_firebase">
+        <MSBuild Projects="thundax.firebase.dproj"/>
+    </Target>
+    <Target Name="thundax_firebase:Clean">
+        <MSBuild Projects="thundax.firebase.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="thundax_firebase:Make">
+        <MSBuild Projects="thundax.firebase.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile;thundax_testproject"/>
+        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile;thundax_testproject;thundax_firebase"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean;thundax_testproject:Clean"/>
+        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean;thundax_testproject:Clean;thundax_firebase:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make;thundax_testproject:Make"/>
+        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make;thundax_testproject:Make;thundax_firebase:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

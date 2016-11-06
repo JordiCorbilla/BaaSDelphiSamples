@@ -24,9 +24,9 @@ object Form3: TForm3
   end
   object Memo1: TMemo
     Left = 45
-    Top = 80
+    Top = 111
     Width = 689
-    Height = 553
+    Height = 522
     Lines.Strings = (
       '')
     ScrollBars = ssBoth
@@ -59,8 +59,8 @@ object Form3: TForm3
     OnClick = Button2Click
   end
   object AddFile: TButton
-    Left = 415
-    Top = 49
+    Left = 45
+    Top = 80
     Width = 110
     Height = 25
     Caption = 'Add File To Firebase'
@@ -75,6 +75,15 @@ object Form3: TForm3
     Caption = 'Delete'
     TabOrder = 6
     OnClick = Button3Click
+  end
+  object GetFile: TButton
+    Left = 161
+    Top = 80
+    Width = 120
+    Height = 25
+    Caption = 'Get File Firebase'
+    TabOrder = 7
+    OnClick = GetFileClick
   end
   object OpenDialog1: TOpenDialog
     Left = 200

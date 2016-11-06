@@ -43,10 +43,12 @@ type
     AddFile: TButton;
     OpenDialog1: TOpenDialog;
     Button3: TButton;
+    GetFile: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure AddFileClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure GetFileClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -134,6 +136,33 @@ end;
 procedure TForm3.Button3Click(Sender: TObject);
 begin
   TFirebaseRest.New.Delete();
+end;
+
+procedure TForm3.GetFileClick(Sender: TObject);
+var
+ arr : TJSONArray;
+ firebase : string;
+ LJsonArr   : TJSONArray;
+ LJsonValue : TJSONValue;
+ LItem : TJSONValue;
+ s, s1 : string;
+begin
+  firebase := TFirebaseRest.New.GetCollection;
+
+
+  //arr := TJSONarray.Create();
+  LJsonArr := TJSONObject.ParseJSONValue(firebase, false) as TJSONArray;
+    for LJsonValue in LJsonArr do
+    begin
+      for LItem in TJSONArray(LJsonValue) do
+      begin
+        if (TJSONPair(LItem).JsonString.Value = 'array') then
+          s := TJSONPair(LItem).JsonValue.Value;
+        if (TJSONPair(LItem).JsonString.Value = 'document') then
+          s1 := TJSONPair(LItem).JsonValue.Value;
+      end;
+    end;
+  //strFileStream := TDBXJSONTools.JSONToStream(JSONArray);
 end;
 
 end.
