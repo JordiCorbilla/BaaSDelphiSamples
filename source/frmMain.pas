@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Graphics, FMX.Forms, FMX.Dialogs, FMX.TabControl, System.Actions, FMX.ActnList,
-  FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation;
+  FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, FMX.ListView.Types,
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView;
 
 type
   Tmain = class(TForm)
@@ -21,6 +22,7 @@ type
     TabItem1: TTabItem;
     TabItem2: TTabItem;
     BottomToolBar: TToolBar;
+    ListView1: TListView;
     procedure FormCreate(Sender: TObject);
     procedure TitleActionUpdate(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);

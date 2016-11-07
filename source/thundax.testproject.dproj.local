@@ -2,8 +2,8 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2016/10/09 19:57:59.000.137,=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
-    <Transaction>2016/10/09 19:58:24.000.678,C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.dfm=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\uFormTest.dfm</Transaction>
-    <Transaction>2016/10/09 19:58:24.000.678,C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.pas=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\uFormTest.pas</Transaction>
-    <Transaction>2016/10/09 19:58:38.000.058,C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\thundax.testproject.dproj</Transaction>
+    <Transaction>2016/10/09 19:58:24.000.678,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\uFormTest.dfm=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.dfm</Transaction>
+    <Transaction>2016/10/09 19:58:24.000.678,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\uFormTest.pas=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit3.pas</Transaction>
+    <Transaction>2016/10/09 19:58:38.000.058,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\thundax.testproject.dproj=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
   </Transactions>
 </BorlandProject>

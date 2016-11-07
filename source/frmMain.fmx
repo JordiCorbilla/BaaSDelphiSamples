@@ -12,7 +12,7 @@ object main: Tmain
   object TopToolBar: TToolBar
     Anchors = []
     Size.Width = 384.000000000000000000
-    Size.Height = 44.000000000000000000
+    Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     object ToolBarLabel: TLabel
@@ -20,10 +20,11 @@ object main: Tmain
       Align = Contents
       Enabled = True
       Size.Width = 384.000000000000000000
-      Size.Height = 44.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'toollabel'
       TextSettings.HorzAlign = Center
+      Text = 'List of Files'
       Visible = True
     end
     object btnBack: TSpeedButton
@@ -31,8 +32,8 @@ object main: Tmain
       Align = MostLeft
       Enabled = True
       ImageIndex = -1
-      Size.Width = 65.000000000000000000
-      Size.Height = 44.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'backtoolbutton'
       Visible = True
@@ -42,9 +43,9 @@ object main: Tmain
       Align = MostRight
       Enabled = True
       ImageIndex = -1
-      Position.X = 340.000000000000000000
-      Size.Width = 44.000000000000000000
-      Size.Height = 44.000000000000000000
+      Position.X = 336.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'nexttoolbutton'
       Visible = True
@@ -54,7 +55,7 @@ object main: Tmain
     Align = Client
     FullSize = True
     Size.Width = 384.000000000000000000
-    Size.Height = 479.000000000000000000
+    Size.Height = 471.000000000000000000
     Size.PlatformDefault = False
     TabHeight = 49.000000000000000000
     TabIndex = 0
@@ -73,6 +74,17 @@ object main: Tmain
       Text = 'Caption Tab Item #1'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
+      object ListView1: TListView
+        ItemAppearanceClassName = 'TListItemAppearance'
+        ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        Align = Client
+        Size.Width = 384.000000000000000000
+        Size.Height = 471.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+      end
     end
     object TabItem2: TTabItem
       CustomIcon = <
@@ -92,9 +104,9 @@ object main: Tmain
   object BottomToolBar: TToolBar
     Align = Bottom
     Anchors = [akLeft]
-    Position.Y = 523.000000000000000000
+    Position.Y = 519.000000000000000000
     Size.Width = 384.000000000000000000
-    Size.Height = 44.000000000000000000
+    Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'bottomtoolbar'
     TabOrder = 2

@@ -8,15 +8,19 @@ inherited main_iPhone4in: Tmain_iPhone4in
       Size.Width = 320.000000000000000000
     end
     inherited btnNext: TSpeedButton
-      Position.X = 276.000000000000000000
+      Position.X = 272.000000000000000000
     end
   end
   inherited TabControl1: TTabControl
     Size.Width = 320.000000000000000000
-    Size.Height = 460.000000000000000000
+    Size.Height = 452.000000000000000000
     inherited TabItem1: TTabItem
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
+      inherited ListView1: TListView
+        Size.Width = 320.000000000000000000
+        Size.Height = 452.000000000000000000
+      end
     end
     inherited TabItem2: TTabItem
       ExplicitSize.cx = 8.000000000000000000
@@ -24,7 +28,7 @@ inherited main_iPhone4in: Tmain_iPhone4in
     end
   end
   inherited BottomToolBar: TToolBar
-    Position.Y = 504.000000000000000000
+    Position.Y = 500.000000000000000000
     Size.Width = 320.000000000000000000
   end
 end

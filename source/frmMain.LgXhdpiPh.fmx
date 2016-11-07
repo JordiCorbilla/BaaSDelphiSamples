@@ -5,20 +5,14 @@ inherited main_LgXhdpiPh: Tmain_LgXhdpiPh
   DesignerMasterStyle = 0
   inherited TopToolBar: TToolBar
     Size.Width = 450.000000000000000000
-    Size.Height = 48.000000000000000000
     inherited ToolBarLabel: TLabel
       Size.Width = 450.000000000000000000
-      Size.Height = 48.000000000000000000
     end
     inherited btnBack: TSpeedButton
-      Size.Width = 48.000000000000000000
-      Size.Height = 48.000000000000000000
       Visible = False
     end
     inherited btnNext: TSpeedButton
       Position.X = 402.000000000000000000
-      Size.Width = 48.000000000000000000
-      Size.Height = 48.000000000000000000
     end
   end
   inherited TabControl1: TTabControl
@@ -27,6 +21,10 @@ inherited main_LgXhdpiPh: Tmain_LgXhdpiPh
     inherited TabItem1: TTabItem
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
+      inherited ListView1: TListView
+        Size.Width = 450.000000000000000000
+        Size.Height = 599.000000000000000000
+      end
     end
     inherited TabItem2: TTabItem
       ExplicitSize.cx = 8.000000000000000000
@@ -36,6 +34,5 @@ inherited main_LgXhdpiPh: Tmain_LgXhdpiPh
   inherited BottomToolBar: TToolBar
     Position.Y = 647.000000000000000000
     Size.Width = 450.000000000000000000
-    Size.Height = 48.000000000000000000
   end
 end
