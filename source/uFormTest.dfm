@@ -23,9 +23,9 @@ object Form3: TForm3
     OnClick = Button1Click
   end
   object Memo1: TMemo
-    Left = 45
+    Left = 400
     Top = 111
-    Width = 689
+    Width = 334
     Height = 522
     Lines.Strings = (
       '')
@@ -86,7 +86,7 @@ object Form3: TForm3
     OnClick = GetFileClick
   end
   object Memo2: TMemo
-    Left = 776
+    Left = 752
     Top = 111
     Width = 689
     Height = 522
@@ -100,6 +100,14 @@ object Form3: TForm3
     Caption = 'Parse'
     TabOrder = 9
     OnClick = Button4Click
+  end
+  object ListBox1: TListBox
+    Left = 45
+    Top = 111
+    Width = 340
+    Height = 522
+    ItemHeight = 13
+    TabOrder = 10
   end
   object OpenDialog1: TOpenDialog
     Left = 200

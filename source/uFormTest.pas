@@ -31,7 +31,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, lib.firebase.rest, DBXJSON, System.JSON, Data.DBXJSONCommon;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, lib.firebase.rest, DBXJSON,
+  System.JSON, Data.DBXJSONCommon, lib.document, generics.collections;
 
 type
   TForm3 = class(TForm)
@@ -46,6 +47,7 @@ type
     GetFile: TButton;
     Memo2: TMemo;
     Button4: TButton;
+    ListBox1: TListBox;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure AddFileClick(Sender: TObject);
@@ -53,6 +55,7 @@ type
     procedure GetFileClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
   private
+    function LoadDocuments(jsonString: string): TList<IDocument>;
     { Private declarations }
   public
     { Public declarations }
@@ -118,9 +121,19 @@ end;
 procedure TForm3.Button1Click(Sender: TObject);
 var
   firebase : string;
+  List : TList<IDocument>;
+  i: Integer;
 begin
   firebase := TFirebaseRest.New.GetCollection;
-  Memo1.Lines.Add(firebase);
+  List := LoadDocuments(firebase);
+  //Memo1.Lines.Add(firebase);
+
+  for i := 0 to list.Count-1 do
+  begin
+    listbox1.AddItem(list[i].FileName, TDocument(list[i]));
+  end;
+
+
 end;
 
 procedure TForm3.Button2Click(Sender: TObject);
@@ -139,6 +152,39 @@ end;
 procedure TForm3.Button3Click(Sender: TObject);
 begin
   TFirebaseRest.New.Delete();
+end;
+
+function TForm3.LoadDocuments(jsonString : string) : TList<IDocument>;
+var
+  s : string;
+  i : integer;
+  j, k : integer;
+  doc : string;
+  name : string;
+  list : TList<IDocument>;
+begin
+  list := TList<IDocument>.Create;
+  s := jsonString;
+  i := 1;
+  while i > 0 do
+  begin
+    i := AnsiPos('array', s);
+    j := AnsiPos('document', s);
+    if ((i > 0) and (j>0)) then
+    begin
+      doc := copy(s, i, j-i);
+      doc := doc.Replace('array":', '');
+      doc := doc.Replace(',"', '');
+      name := AnsiRightStr(s, length(s)-j+1);
+      k := AnsiPos('}', name);
+      name := copy(name, 0, k);
+      name := name.Replace('document":"', '');
+      name := name.Replace('"}', '');
+      s := AnsiRightStr(s, length(s)-(j+k));
+      list.Add(TDocument.New(name, doc));
+    end;
+  end;
+  result := list;
 end;
 
 procedure TForm3.Button4Click(Sender: TObject);
