@@ -44,11 +44,14 @@ type
     OpenDialog1: TOpenDialog;
     Button3: TButton;
     GetFile: TButton;
+    Memo2: TMemo;
+    Button4: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure AddFileClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure GetFileClick(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -61,7 +64,7 @@ var
 implementation
 
 uses
-  NetEncoding, IdCoderMIME, IdHash, IdHMAC, IdHMACSHA1, IdGlobal;
+  NetEncoding, IdCoderMIME, IdHash, IdHMAC, IdHMACSHA1, IdGlobal, StrUtils;
 
 {$R *.dfm}
 
@@ -138,6 +141,62 @@ begin
   TFirebaseRest.New.Delete();
 end;
 
+procedure TForm3.Button4Click(Sender: TObject);
+var
+  s : string;
+  i : integer;
+  j, k : integer;
+  doc : string;
+  name : string;
+  jsonArray :   TJSONArray;
+    fs: TFileStream;
+    Stream : TStream;
+    buf: TBytes;
+begin
+  //Parse the following string
+  //{"-KUmo1JUUAVTRAiZVXKd":{"array":[37,80],"document":"TESTING FIREBASE.pdf"}}
+  s := '{"-KUmo1JUUAVTRAiZVXKd":{"array":[37,80],"document":"TESTING FIREBASE.pdf"},"-KUmo1JUUAVTRAiZVXKd":{"array":[37,80],"document":"TESTING FIREBASE.pdf"}}'; //memo1.Lines.ToString;
+  s := memo1.Lines.Text;
+
+  i := 1;
+  while i > 0 do
+  begin
+    i := AnsiPos('array', s);
+    j := AnsiPos('document', s);
+    if ((i > 0) and (j>0)) then
+    begin
+      doc := copy(s, i, j-i);
+      //array":[37,80],"
+      doc := doc.Replace('array":', '');
+      doc := doc.Replace(',"', '');
+      memo2.Lines.Add(doc);
+
+      name := AnsiRightStr(s, length(s)-j+1);
+      k := AnsiPos('}', name);
+      name := copy(name, 0, k);
+      name := name.Replace('document":"', '');
+      name := name.Replace('"}', '');
+      memo2.Lines.Add(name);
+      s := AnsiRightStr(s, length(s)-(j+k));
+      //document":"TESTING FIREBASE.pdf"}
+    end;
+  end;
+
+   jsonArray := TJSONObject.ParseJSONValue(doc) as TJSONArray;
+
+   fs := TFileStream.Create('c:\temp\' + name, fmCreate);
+   Stream := TDBXJSONTools.JSONToStream(jsonArray);
+   SetLength(buf, Stream.Size);
+    Stream.Position := 0;
+    Stream.ReadBuffer(buf[0], Stream.Size);
+    fs.WriteBuffer(buf[0], Stream.Size);
+    Stream.Free;
+    fs.Free;
+
+
+
+end;
+
 procedure TForm3.GetFileClick(Sender: TObject);
 var
  arr : TJSONArray;
@@ -151,17 +210,17 @@ begin
 
 
   //arr := TJSONarray.Create();
-  LJsonArr := TJSONObject.ParseJSONValue(firebase, false) as TJSONArray;
-    for LJsonValue in LJsonArr do
-    begin
-      for LItem in TJSONArray(LJsonValue) do
-      begin
-        if (TJSONPair(LItem).JsonString.Value = 'array') then
-          s := TJSONPair(LItem).JsonValue.Value;
-        if (TJSONPair(LItem).JsonString.Value = 'document') then
-          s1 := TJSONPair(LItem).JsonValue.Value;
-      end;
-    end;
+//  LJsonArr := TJSONObject.ParseJSONValueUTF8(firebase, false) as TJSONArray;
+//    for LJsonValue in LJsonArr do
+//    begin
+//      for LItem in TJSONArray(LJsonValue) do
+//      begin
+//        if (TJSONPair(LItem).JsonString.Value = 'array') then
+//          s := TJSONPair(LItem).JsonValue.Value;
+//        if (TJSONPair(LItem).JsonString.Value = 'document') then
+//          s1 := TJSONPair(LItem).JsonValue.Value;
+//      end;
+//    end;
   //strFileStream := TDBXJSONTools.JSONToStream(JSONArray);
 end;
 

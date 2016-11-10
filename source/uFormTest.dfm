@@ -3,7 +3,7 @@ object Form3: TForm3
   Top = 0
   Caption = 'Form3'
   ClientHeight = 657
-  ClientWidth = 782
+  ClientWidth = 1546
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -84,6 +84,22 @@ object Form3: TForm3
     Caption = 'Get File Firebase'
     TabOrder = 7
     OnClick = GetFileClick
+  end
+  object Memo2: TMemo
+    Left = 776
+    Top = 111
+    Width = 689
+    Height = 522
+    TabOrder = 8
+  end
+  object Button4: TButton
+    Left = 559
+    Top = 80
+    Width = 75
+    Height = 25
+    Caption = 'Parse'
+    TabOrder = 9
+    OnClick = Button4Click
   end
   object OpenDialog1: TOpenDialog
     Left = 200
