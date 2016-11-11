@@ -147,6 +147,7 @@ begin
     IdHTTP := TIdHTTP.Create(nil);
     try
       IdHTTP.IOHandler := IdIOHandler;
+      IdHTTP.ReadTimeout := IdTimeoutInfinite;
       IdHTTP.Request.Connection := 'Keep-Alive';
       IdIOHandler.SSLOptions.Method := sslvSSLv23;
       IdHTTP.Request.CustomHeaders.Clear;
