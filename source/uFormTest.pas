@@ -160,6 +160,9 @@ var
 begin
   if (ListBox1.ItemIndex >= 0) then
   begin
+    WebBrowser1.Navigate('about:blank');
+    sleep(2000);
+    Application.ProcessMessages;
     document := (listBox1.Items.Objects[ListBox1.ItemIndex] as TDocument);
     document.Save;
     WebBrowser1.Navigate('c:\temp\' + document.FileName);
