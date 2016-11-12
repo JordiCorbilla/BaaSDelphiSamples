@@ -65,7 +65,6 @@ var
   IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
   response : string;
   JsonToSend: TStringStream;
-  encodedHeader : string;
 begin
   JsonToSend := TStringStream.Create(jsonString);
   try
@@ -102,7 +101,6 @@ var
   IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
   response : string;
   JsonToSend: TStringStream;
-  encodedHeader : string;
 begin
   JsonToSend := TStringStream.Create('');
   try
@@ -138,7 +136,6 @@ var
   IdHTTP: TIdHTTP;
   IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
   response : string;
-  encodedHeader : string;
 begin
   try
     IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);

@@ -32,7 +32,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, lib.firebase.rest, DBXJSON,
-  System.JSON, Data.DBXJSONCommon, lib.document, generics.collections;
+  System.JSON, Data.DBXJSONCommon, lib.document, generics.collections,
+  Vcl.OleCtrls, SHDocVw;
 
 type
   TForm3 = class(TForm)
@@ -44,16 +45,16 @@ type
     AddFile: TButton;
     OpenDialog1: TOpenDialog;
     Button3: TButton;
-    GetFile: TButton;
     Memo2: TMemo;
     Button4: TButton;
     ListBox1: TListBox;
+    WebBrowser1: TWebBrowser;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure AddFileClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure GetFileClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure ListBox1DblClick(Sender: TObject);
   private
     function LoadDocuments(jsonString: string): TList<IDocument>;
     { Private declarations }
@@ -77,7 +78,6 @@ var
   arr : TJSONArray;
   s : string;
   ByteArray: array of Byte;
-  B: byte;
 begin
   OpenDialog1.InitialDir := GetCurrentDir;
 
@@ -152,6 +152,18 @@ end;
 procedure TForm3.Button3Click(Sender: TObject);
 begin
   TFirebaseRest.New.Delete();
+end;
+
+procedure TForm3.ListBox1DblClick(Sender: TObject);
+var
+  document : TDOcument;
+begin
+  if (ListBox1.ItemIndex >= 0) then
+  begin
+    document := (listBox1.Items.Objects[ListBox1.ItemIndex] as TDocument);
+    document.Save;
+    WebBrowser1.Navigate('c:\temp\' + document.FileName);
+  end;
 end;
 
 function TForm3.LoadDocuments(jsonString : string) : TList<IDocument>;
@@ -238,36 +250,6 @@ begin
     fs.WriteBuffer(buf[0], Stream.Size);
     Stream.Free;
     fs.Free;
-
-
-
-end;
-
-procedure TForm3.GetFileClick(Sender: TObject);
-var
- arr : TJSONArray;
- firebase : string;
- LJsonArr   : TJSONArray;
- LJsonValue : TJSONValue;
- LItem : TJSONValue;
- s, s1 : string;
-begin
-  firebase := TFirebaseRest.New.GetCollection;
-
-
-  //arr := TJSONarray.Create();
-//  LJsonArr := TJSONObject.ParseJSONValueUTF8(firebase, false) as TJSONArray;
-//    for LJsonValue in LJsonArr do
-//    begin
-//      for LItem in TJSONArray(LJsonValue) do
-//      begin
-//        if (TJSONPair(LItem).JsonString.Value = 'array') then
-//          s := TJSONPair(LItem).JsonValue.Value;
-//        if (TJSONPair(LItem).JsonString.Value = 'document') then
-//          s1 := TJSONPair(LItem).JsonValue.Value;
-//      end;
-//    end;
-  //strFileStream := TDBXJSONTools.JSONToStream(JSONArray);
 end;
 
 end.

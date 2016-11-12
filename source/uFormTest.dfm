@@ -25,7 +25,7 @@ object Form3: TForm3
   object Memo1: TMemo
     Left = 400
     Top = 111
-    Width = 334
+    Width = 177
     Height = 522
     Lines.Strings = (
       '')
@@ -76,21 +76,12 @@ object Form3: TForm3
     TabOrder = 6
     OnClick = Button3Click
   end
-  object GetFile: TButton
-    Left = 161
-    Top = 80
-    Width = 120
-    Height = 25
-    Caption = 'Get File Firebase'
-    TabOrder = 7
-    OnClick = GetFileClick
-  end
   object Memo2: TMemo
-    Left = 752
+    Left = 583
     Top = 111
-    Width = 689
+    Width = 130
     Height = 522
-    TabOrder = 8
+    TabOrder = 7
   end
   object Button4: TButton
     Left = 559
@@ -98,7 +89,7 @@ object Form3: TForm3
     Width = 75
     Height = 25
     Caption = 'Parse'
-    TabOrder = 9
+    TabOrder = 8
     OnClick = Button4Click
   end
   object ListBox1: TListBox
@@ -107,7 +98,21 @@ object Form3: TForm3
     Width = 340
     Height = 522
     ItemHeight = 13
+    TabOrder = 9
+    OnDblClick = ListBox1DblClick
+  end
+  object WebBrowser1: TWebBrowser
+    Left = 719
+    Top = 111
+    Width = 819
+    Height = 522
     TabOrder = 10
+    ControlData = {
+      4C000000A5540000F33500000000000000000000000000000000000000000000
+      000000004C000000000000000000000001000000E0D057007335CF11AE690800
+      2B2E126208000000000000004C0000000114020000000000C000000000000046
+      8000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000100000000000000000000000000000000000000}
   end
   object OpenDialog1: TOpenDialog
     Left = 200
