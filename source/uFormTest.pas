@@ -162,12 +162,12 @@ var
 begin
   if (ListBox1.ItemIndex >= 0) then
   begin
-    WebBrowser1.Navigate('about:blank');
+    WebBrowser1.Navigate2('about:blank');
     sleep(2000);
     Application.ProcessMessages;
     document := (listBox1.Items.Objects[ListBox1.ItemIndex] as TDocument);
     document.Save;
-    WebBrowser1.Navigate('c:\temp\' + document.FileName);
+    WebBrowser1.Navigate2('file://c:/temp/' + document.FileName);
   end;
 end;
 
@@ -259,7 +259,8 @@ end;
 
 procedure TForm3.Button5Click(Sender: TObject);
 begin
-  WebBrowser1.Navigate('www.google.co.uk');
+  WebBrowser1.Navigate2('file://c:/temp/TESTING FIREBASE 2.pdf');
+ // WebBrowser1.Navigate('www.google.co.uk');
 end;
 
 end.
