@@ -16,7 +16,7 @@
     <Transaction>2016/10/18 23:07:04.000.467,=IndyProtocols.dcp</Transaction>
     <Transaction>2016/10/18 23:07:04.000.459,=IndySystem.dcp</Transaction>
     <Transaction>2016/10/18 23:07:04.000.475,=IndyCore.dcp</Transaction>
-    <Transaction>2016/11/10 22:27:41.579,=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\Unit1.pas</Transaction>
-    <Transaction>2016/11/10 22:27:52.857,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\lib.document.pas=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\Unit1.pas</Transaction>
+    <Transaction>2016/11/10 22:27:41.000.579,=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\Unit1.pas</Transaction>
+    <Transaction>2016/11/10 22:27:52.000.857,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\lib.document.pas=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

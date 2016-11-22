@@ -49,12 +49,14 @@ type
     Button4: TButton;
     ListBox1: TListBox;
     WebBrowser1: TWebBrowser;
+    Button5: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure AddFileClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure ListBox1DblClick(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
   private
     function LoadDocuments(jsonString: string): TList<IDocument>;
     { Private declarations }
@@ -253,6 +255,11 @@ begin
     fs.WriteBuffer(buf[0], Stream.Size);
     Stream.Free;
     fs.Free;
+end;
+
+procedure TForm3.Button5Click(Sender: TObject);
+begin
+  WebBrowser1.Navigate('www.google.co.uk');
 end;
 
 end.
