@@ -43,6 +43,10 @@ inherited main_iPhone4in: Tmain_iPhone4in
       Size.Height = 11.000000000000000000
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
+      inherited WebBrowser1: TWebBrowser
+        Size.Width = 320.000000000000000000
+        Size.Height = 460.000000000000000000
+      end
     end
   end
   inherited BottomToolBar: TToolBar

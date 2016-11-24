@@ -8,7 +8,7 @@ uses
   FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
   lib.firebase.rest, DBXJSON, System.JSON, Data.DBXJSONCommon, lib.document, generics.collections,
-  FMX.Layouts, FMX.ListBox;
+  FMX.Layouts, FMX.ListBox, FMX.WebBrowser;
 
 type
   Tmain = class(TForm)
@@ -27,6 +27,7 @@ type
     Refresh: TAction;
     SpeedButton1: TSpeedButton;
     ListBox1: TListBox;
+    WebBrowser1: TWebBrowser;
     procedure FormCreate(Sender: TObject);
     procedure TitleActionUpdate(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
@@ -94,7 +95,7 @@ begin
     ListBoxItem := TListBoxItem.Create(ListBox1);
     ListBoxItem.Text := list[i].FileName;
     ListBoxItem.Data :=  TDocument(list[i]);
-    ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(2);
+    ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(1);
     ListBox1.AddObject(ListBoxItem);
   end;
   ListBox1.EndUpdate;

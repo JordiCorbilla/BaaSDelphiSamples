@@ -106,6 +106,12 @@ object main: Tmain
       Text = 'Caption Tab Item #2'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
+      object WebBrowser1: TWebBrowser
+        Align = Client
+        Size.Width = 384.000000000000000000
+        Size.Height = 471.000000000000000000
+        Size.PlatformDefault = False
+      end
     end
   end
   object BottomToolBar: TToolBar
