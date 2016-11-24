@@ -61,6 +61,11 @@ object main: Tmain
     TabIndex = 0
     TabOrder = 1
     TabPosition = None
+    Sizes = (
+      384s
+      471s
+      384s
+      471s)
     object TabItem1: TTabItem
       CustomIcon = <
         item
@@ -74,16 +79,18 @@ object main: Tmain
       Text = 'Caption Tab Item #1'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object ListView1: TListView
-        ItemAppearanceClassName = 'TListItemAppearance'
-        ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
-        HeaderAppearanceClassName = 'TListHeaderObjects'
-        FooterAppearanceClassName = 'TListHeaderObjects'
+      object ListBox1: TListBox
         Align = Client
         Size.Width = 384.000000000000000000
         Size.Height = 471.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
+        DisableFocusEffect = True
+        DefaultItemStyles.ItemStyle = ''
+        DefaultItemStyles.GroupHeaderStyle = ''
+        DefaultItemStyles.GroupFooterStyle = ''
+        Viewport.Width = 380.000000000000000000
+        Viewport.Height = 467.000000000000000000
       end
     end
     object TabItem2: TTabItem
@@ -110,6 +117,18 @@ object main: Tmain
     Size.PlatformDefault = False
     StyleLookup = 'bottomtoolbar'
     TabOrder = 2
+    object SpeedButton1: TSpeedButton
+      Action = Refresh
+      Align = MostRight
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 336.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'refreshtoolbutton'
+      Visible = True
+    end
   end
   object ActionList1: TActionList
     Left = 176
@@ -127,6 +146,10 @@ object main: Tmain
     object NextTabAction1: TNextTabAction
       Category = 'Tab'
       TabControl = TabControl1
+    end
+    object Refresh: TAction
+      Text = 'Refresh'
+      OnExecute = RefreshExecute
     end
   end
 end

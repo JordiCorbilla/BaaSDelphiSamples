@@ -18,12 +18,19 @@ inherited main_LgXhdpiPh: Tmain_LgXhdpiPh
   inherited TabControl1: TTabControl
     Size.Width = 450.000000000000000000
     Size.Height = 599.000000000000000000
+    Sizes = (
+      450s
+      599s
+      450s
+      599s)
     inherited TabItem1: TTabItem
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      inherited ListView1: TListView
+      inherited ListBox1: TListBox
         Size.Width = 450.000000000000000000
         Size.Height = 599.000000000000000000
+        Viewport.Width = 450.000000000000000000
+        Viewport.Height = 599.000000000000000000
       end
     end
     inherited TabItem2: TTabItem
@@ -34,5 +41,8 @@ inherited main_LgXhdpiPh: Tmain_LgXhdpiPh
   inherited BottomToolBar: TToolBar
     Position.Y = 647.000000000000000000
     Size.Width = 450.000000000000000000
+    inherited SpeedButton1: TSpeedButton
+      Position.X = 402.000000000000000000
+    end
   end
 end

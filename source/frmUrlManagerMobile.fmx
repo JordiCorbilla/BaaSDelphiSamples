@@ -43,6 +43,11 @@ object Form2: TForm2
     TabIndex = 0
     TabOrder = 12
     TabPosition = PlatformDefault
+    Sizes = (
+      329s
+      368s
+      329s
+      368s)
     object tabCloud: TTabItem
       CustomIcon = <
         item
@@ -84,16 +89,16 @@ object Form2: TForm2
       ExplicitSize.cy = 49.000000000000000000
       object Panel1: TPanel
         Align = Client
-        Size.Width = 50.000000000000000000
-        Size.Height = 50.000000000000000000
+        Size.Width = 329.000000000000000000
+        Size.Height = 368.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object lblUser: TLabel
           AutoSize = True
           Position.X = 24.000000000000000000
           Position.Y = 24.000000000000000000
-          Size.Width = 61.000000000000000000
-          Size.Height = 24.000000000000000000
+          Size.Width = 57.000000000000000000
+          Size.Height = 22.000000000000000000
           Size.PlatformDefault = False
           TextSettings.WordWrap = False
           Text = 'lblUser'
@@ -102,8 +107,8 @@ object Form2: TForm2
           AutoSize = True
           Position.X = 24.000000000000000000
           Position.Y = 72.000000000000000000
-          Size.Width = 58.000000000000000000
-          Size.Height = 24.000000000000000000
+          Size.Width = 55.000000000000000000
+          Size.Height = 22.000000000000000000
           Size.PlatformDefault = False
           TextSettings.WordWrap = False
           Text = 'Label4'
@@ -112,8 +117,8 @@ object Form2: TForm2
           AutoSize = True
           Position.X = 24.000000000000000000
           Position.Y = 120.000000000000000000
-          Size.Width = 58.000000000000000000
-          Size.Height = 24.000000000000000000
+          Size.Width = 55.000000000000000000
+          Size.Height = 22.000000000000000000
           Size.PlatformDefault = False
           TextSettings.WordWrap = False
           Text = 'Label4'
@@ -161,18 +166,5 @@ object Form2: TForm2
     TabOrder = 3
     Text = 'Add'
     OnClick = btnAddClick
-  end
-  object KinveyProvider1: TKinveyProvider
-    ApiVersion = '3'
-    AppKey = 'kid_HkaDuTFH'
-    AppSecret = '78a3d240526d4440bdf5c9d68403a7dc'
-    MasterSecret = '63162143962846459271516e26906ab8'
-    Left = 152
-    Top = 400
-  end
-  object BackendStorage1: TBackendStorage
-    Provider = KinveyProvider1
-    Left = 152
-    Top = 456
   end
 end

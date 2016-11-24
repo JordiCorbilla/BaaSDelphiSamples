@@ -42,9 +42,7 @@ uses
 
 type
   TForm2 = class(TForm)
-    KinveyProvider1: TKinveyProvider;
     ListView1: TListView;
-    BackendStorage1: TBackendStorage;
     btnRefresh: TButton;
     Label1: TLabel;
     Edit1: TEdit;

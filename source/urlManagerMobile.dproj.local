@@ -2,11 +2,11 @@
 <BorlandProject>
 	<Transactions>
     <Transaction>2016/06/25 09:44:34.000.525,=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2016/06/25 09:45:14.000.098,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\frmUrlManagerMobile.pas=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
-    <Transaction>2016/06/25 09:45:14.000.098,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\frmUrlManagerMobile.fmx=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.fmx</Transaction>
-    <Transaction>2016/06/25 09:45:21.000.275,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\urlManagerMobile.dproj=C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>2016/06/25 10:08:36.000.900,=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\lib.options.pas</Transaction>
+    <Transaction>2016/06/25 09:45:14.000.098,C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.pas=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\frmUrlManagerMobile.pas</Transaction>
+    <Transaction>2016/06/25 09:45:14.000.098,C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Unit2.fmx=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\frmUrlManagerMobile.fmx</Transaction>
+    <Transaction>2016/06/25 09:45:21.000.275,C:\Users\thund\OneDrive\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\urlManagerMobile.dproj</Transaction>
     <Transaction>2016/06/25 10:08:36.000.909,=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\lib.urls.pas</Transaction>
+    <Transaction>2016/06/25 10:08:36.000.900,=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\lib.options.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile Android="32048c170dd412e7"/>
