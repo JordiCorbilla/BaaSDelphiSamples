@@ -32,6 +32,7 @@ type
     procedure TitleActionUpdate(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
     procedure RefreshExecute(Sender: TObject);
+    procedure ListBoxItem1Click(Sender: TObject);
   private
     function LoadDocuments(jsonString: string): TList<IDocument>;
     { Private declarations }
@@ -45,7 +46,15 @@ var
 implementation
 
 uses
-  StrUtils;
+  StrUtils,
+
+{$IFDEF ANDROID}
+   Androidapi.JNI.GraphicsContentViewText,
+   Androidapi.Helpers,
+   Androidapi.JNI.JavaTypes,
+   Androidapi.JNI.Net
+{$ENDIF}
+, System.IOUtils;
 
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
@@ -82,7 +91,6 @@ var
   firebase : string;
   List : TList<IDocument>;
   i: Integer;
-  listitem : TListViewItem;
   ListBoxItem : TListBoxItem;
 begin
   //Load files from the cloud
@@ -96,9 +104,32 @@ begin
     ListBoxItem.Text := list[i].FileName;
     ListBoxItem.Data :=  TDocument(list[i]);
     ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(1);
+    ListBoxItem.OnClick := ListBoxItem1Click;
     ListBox1.AddObject(ListBoxItem);
   end;
   ListBox1.EndUpdate;
+end;
+
+procedure Tmain.ListBoxItem1Click(Sender: TObject);
+var
+   fName       : String;
+   document : TDocument;
+{$IFDEF ANDROID}
+   Intent      : JIntent;
+   URI         : Jnet_Uri;
+{$ENDIF}
+begin
+  document := ((Sender as TListBoxItem).Data as TDocument);
+  document.Save(TPath.GetSharedDownloadsPath + PathDelim);
+  fName := TPath.Combine(TPath.GetSharedDownloadsPath, document.FileName);
+  {$IFDEF ANDROID}
+    URI := TJnet_Uri.JavaClass.parse(StringToJString('file:///' + fName));
+    intent := TJIntent.Create;
+    intent.setAction(TJIntent.JavaClass.ACTION_VIEW);
+    intent.setDataAndType(URI,StringToJString('application/pdf'));
+    SharedActivity.startActivity(intent);
+  {$ENDIF}
+  TabControl1.ActiveTab := TabItem2;
 end;
 
 function Tmain.LoadDocuments(jsonString : string) : TList<IDocument>;

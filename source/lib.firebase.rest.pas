@@ -79,7 +79,7 @@ begin
       IdHTTP.Request.CustomHeaders.Clear;
       IdHTTP.Request.ContentType := 'application/json';
       response := IdHTTP.Post('https://delphitestproject.firebaseio.com/.json?auth='+FOptions.FirebaseAuth, JsonToSend);
-      response := response.Replace(AnsiChar(#10), '');
+      response := response.Replace(Char(#10), '');
       result := (response.Contains('name'));
     finally
       IdHTTP.Free;
@@ -115,7 +115,7 @@ begin
       IdHTTP.Request.CustomHeaders.Clear;
       IdHTTP.Request.ContentType := 'application/json';
       IdHTTP.Delete('https://delphitestproject.firebaseio.com/.json?auth='+FOptions.FirebaseAuth, JsonToSend);
-      response := response.Replace(AnsiChar(#10), '');
+      response := response.Replace(Char(#10), '');
       result := (response.Contains('name'));
     finally
       IdHTTP.Free;

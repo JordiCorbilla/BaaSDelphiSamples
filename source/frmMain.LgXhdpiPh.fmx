@@ -18,11 +18,6 @@ inherited main_LgXhdpiPh: Tmain_LgXhdpiPh
   inherited TabControl1: TTabControl
     Size.Width = 450.000000000000000000
     Size.Height = 599.000000000000000000
-    Sizes = (
-      450s
-      599s
-      450s
-      599s)
     inherited TabItem1: TTabItem
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
@@ -36,10 +31,6 @@ inherited main_LgXhdpiPh: Tmain_LgXhdpiPh
     inherited TabItem2: TTabItem
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      inherited WebBrowser1: TWebBrowser
-        Size.Width = 450.000000000000000000
-        Size.Height = 599.000000000000000000
-      end
     end
   end
   inherited BottomToolBar: TToolBar

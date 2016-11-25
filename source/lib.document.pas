@@ -37,7 +37,8 @@ type
     function GetFileName() : string;
     property FileName : string read GetFileName write SetFileName;
     property Document : string read GetDocument write SetDocument;
-    procedure Save();
+    procedure Save(); overload;
+    procedure Save(path : string); overload;
   end;
 
   TDocument = class(TInterfacedObject, IDocument)
@@ -53,7 +54,8 @@ type
     property Document : string read GetDocument write SetDocument;
     constructor Create(FileName : string; Document : string);
     class function New(FileName : string; Document : string): IDocument;
-    procedure Save();
+    procedure Save(); overload;
+    procedure Save(path : string); overload;
   end;
 
 implementation
@@ -94,6 +96,27 @@ begin
   try
     jsonArray := TJSONObject.ParseJSONValue(FDocument) as TJSONArray;
     fs := TFileStream.Create('c:\temp\' + FFileName, fmCreate);
+    Stream := TDBXJSONTools.JSONToStream(jsonArray);
+    SetLength(buf, Stream.Size);
+    Stream.Position := 0;
+    Stream.ReadBuffer(buf[0], Stream.Size);
+    fs.WriteBuffer(buf[0], Stream.Size);
+  finally
+    Stream.Free;
+    fs.Free;
+  end;
+end;
+
+procedure TDocument.Save(path : string);
+var
+  jsonArray :   TJSONArray;
+  fs: TFileStream;
+  Stream : TStream;
+  buf: TBytes;
+begin
+  try
+    jsonArray := TJSONObject.ParseJSONValue(FDocument) as TJSONArray;
+    fs := TFileStream.Create(path + FFileName, fmCreate);
     Stream := TDBXJSONTools.JSONToStream(jsonArray);
     SetLength(buf, Stream.Size);
     Stream.Position := 0;

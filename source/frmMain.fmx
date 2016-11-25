@@ -61,11 +61,6 @@ object main: Tmain
     TabIndex = 0
     TabOrder = 1
     TabPosition = None
-    Sizes = (
-      384s
-      471s
-      384s
-      471s)
     object TabItem1: TTabItem
       CustomIcon = <
         item
@@ -108,8 +103,8 @@ object main: Tmain
       ExplicitSize.cy = 8.000000000000000000
       object WebBrowser1: TWebBrowser
         Align = Client
-        Size.Width = 384.000000000000000000
-        Size.Height = 471.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
       end
     end

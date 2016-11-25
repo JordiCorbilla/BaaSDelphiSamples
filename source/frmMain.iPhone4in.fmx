@@ -21,32 +21,19 @@ inherited main_iPhone4in: Tmain_iPhone4in
   inherited TabControl1: TTabControl
     Size.Width = 320.000000000000000000
     Size.Height = 460.000000000000000000
-    Sizes = (
-      320s
-      460s
-      320s
-      460s)
     inherited TabItem1: TTabItem
-      Size.Width = 11.000000000000000000
-      Size.Height = 11.000000000000000000
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
       inherited ListBox1: TListBox
         Size.Width = 320.000000000000000000
         Size.Height = 460.000000000000000000
-        Viewport.Width = 320.000000000000000000
-        Viewport.Height = 460.000000000000000000
+        Viewport.Width = 316.000000000000000000
+        Viewport.Height = 456.000000000000000000
       end
     end
     inherited TabItem2: TTabItem
-      Size.Width = 11.000000000000000000
-      Size.Height = 11.000000000000000000
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      inherited WebBrowser1: TWebBrowser
-        Size.Width = 320.000000000000000000
-        Size.Height = 460.000000000000000000
-      end
     end
   end
   inherited BottomToolBar: TToolBar
