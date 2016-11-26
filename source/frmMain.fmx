@@ -2,7 +2,7 @@ object main: Tmain
   Left = 0
   Top = 0
   Caption = 'Home'
-  ClientHeight = 567
+  ClientHeight = 568
   ClientWidth = 384
   FormFactor.Width = 1440
   FormFactor.Height = 900
@@ -23,16 +23,16 @@ object main: Tmain
       Size.PlatformDefault = False
       StyleLookup = 'toollabel'
       TextSettings.HorzAlign = Center
-      Text = 'Cloud Storage'
+      Text = 'Firebase Cloud Storage (by Jordi Corbilla)'
       Visible = True
     end
   end
   object BottomToolBar: TToolBar
     Align = Bottom
     Anchors = [akLeft]
-    Position.Y = 512.000000000000000000
+    Position.Y = 520.000000000000000000
     Size.Width = 384.000000000000000000
-    Size.Height = 55.000000000000000000
+    Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'bottomtoolbar'
     TabOrder = 2
@@ -43,7 +43,7 @@ object main: Tmain
       ImageIndex = -1
       Position.X = 336.000000000000000000
       Size.Width = 48.000000000000000000
-      Size.Height = 55.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'refreshtoolbutton'
       Visible = True
@@ -54,29 +54,17 @@ object main: Tmain
       Enabled = True
       ImageIndex = -1
       Size.Width = 48.000000000000000000
-      Size.Height = 55.000000000000000000
+      Size.Height = 48.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'additembutton'
       Visible = True
     end
-  end
-  object ListBox1: TListBox
-    Align = Client
-    Size.Width = 384.000000000000000000
-    Size.Height = 464.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 0
-    DisableFocusEffect = True
-    DefaultItemStyles.ItemStyle = ''
-    DefaultItemStyles.GroupHeaderStyle = ''
-    DefaultItemStyles.GroupFooterStyle = ''
-    Viewport.Width = 380.000000000000000000
-    Viewport.Height = 460.000000000000000000
     object AniIndicator2: TAniIndicator
-      Align = Client
+      Align = HorzCenter
       Enabled = True
-      Size.Width = 380.000000000000000000
-      Size.Height = 460.000000000000000000
+      Position.X = 128.000000000000000000
+      Size.Width = 50.000000000000000000
+      Size.Height = 50.000000000000000000
       Size.PlatformDefault = False
       Visible = False
       object FloatAnimation2: TFloatAnimation
@@ -89,6 +77,23 @@ object main: Tmain
         Trigger = 'IsVisible=true'
       end
     end
+  end
+  object ListBox1: TListBox
+    Align = Client
+    Size.Width = 384.000000000000000000
+    Size.Height = 472.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 380.000000000000000000
+    Viewport.Height = 468.000000000000000000
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 176
+    Top = 136
   end
   object ActionList1: TActionList
     Left = 176
@@ -105,16 +110,10 @@ object main: Tmain
       Category = 'Tab'
     end
     object Refresh: TAction
-      Text = 'Refresh'
       OnExecute = RefreshExecute
     end
     object Upload: TAction
-      Text = 'Upload'
       OnExecute = UploadExecute
     end
-  end
-  object OpenDialog1: TOpenDialog
-    Left = 176
-    Top = 136
   end
 end

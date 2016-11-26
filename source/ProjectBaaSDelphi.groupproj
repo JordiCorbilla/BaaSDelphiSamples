@@ -15,7 +15,7 @@
         <Projects Include="thundax.testproject.dproj">
             <Dependencies>thundax.baas.providers.dproj</Dependencies>
         </Projects>
-        <Projects Include="thundax.firebase.dproj">
+        <Projects Include="CloudStreaming.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -62,23 +62,23 @@
     <Target Name="thundax_testproject:Make" DependsOnTargets="thundax.baas.providers:Make">
         <MSBuild Projects="thundax.testproject.dproj" Targets="Make"/>
     </Target>
-    <Target Name="thundax_firebase">
-        <MSBuild Projects="thundax.firebase.dproj"/>
+    <Target Name="CloudStreaming">
+        <MSBuild Projects="CloudStreaming.dproj"/>
     </Target>
-    <Target Name="thundax_firebase:Clean">
-        <MSBuild Projects="thundax.firebase.dproj" Targets="Clean"/>
+    <Target Name="CloudStreaming:Clean">
+        <MSBuild Projects="CloudStreaming.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="thundax_firebase:Make">
-        <MSBuild Projects="thundax.firebase.dproj" Targets="Make"/>
+    <Target Name="CloudStreaming:Make">
+        <MSBuild Projects="CloudStreaming.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile;thundax_testproject;thundax_firebase"/>
+        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile;thundax_testproject;CloudStreaming"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean;thundax_testproject:Clean;thundax_firebase:Clean"/>
+        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean;thundax_testproject:Clean;CloudStreaming:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make;thundax_testproject:Make;thundax_firebase:Make"/>
+        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make;thundax_testproject:Make;CloudStreaming:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -24,14 +24,14 @@ inherited main_iPhone4in: Tmain_iPhone4in
       Size.Width = 26.000000000000000000
       Size.Height = 26.000000000000000000
     end
+    inherited AniIndicator2: TAniIndicator
+      Position.Y = 192.000000000000000000
+    end
   end
   inherited ListBox1: TListBox
     Size.Width = 320.000000000000000000
     Size.Height = 460.000000000000000000
     Viewport.Width = 320.000000000000000000
     Viewport.Height = 460.000000000000000000
-    inherited AniIndicator2: TAniIndicator
-      Enabled = True
-    end
   end
 end

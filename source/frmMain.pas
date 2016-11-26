@@ -137,19 +137,15 @@ end;
 
 procedure Tmain.UploadExecute(Sender: TObject);
 var
-  strFileStream: TFileStream;
-  arr : TJSONArray;
-  s : string;
-  ByteArray: array of Byte;
+  filename : string;
 begin
-  OpenDialog1.InitialDir := GetCurrentDir;
+  OpenDialog1.InitialDir := TPath.GetSharedDownloadsPath;
 
   // Only allow existing files to be selected
   //OpenDialog1.Options := [ofFileMustExist];
 
   // Allow only .dpr and .pas files to be selected
-  OpenDialog1.Filter :=
-    'PDF Files|*.pdf|MS Word|*.docx';
+  OpenDialog1.Filter := 'PDF Files|*.pdf|MS Word|*.docx';
 
   // Select pascal files as the starting filter type
   //OpenDialog1.FilterIndex := 2;
@@ -157,20 +153,52 @@ begin
   // Display the open file dialog
   if OpenDialog1.Execute then
   begin
-    //ShowMessage('File : '+OpenDialog1.FileName);
-    strFileStream := TFileStream.Create(OpenDialog1.FileName, fmOpenRead);
-    arr := TDBXJSONTools.StreamToJSON(strFileStream, 0, strFileStream.Size);
+    filename := OpenDialog1.FileName;
 
-    strFileStream.Position := 0;
-    SetLength(ByteArray, strFileStream.Size);
-    strFileStream.Read(ByteArray[0], strFileStream.Size);
-    strFileStream.Free;
+    TTask.Create(
+      procedure
+      var
+        strFileStream: TFileStream;
+        arr : TJSONArray;
+        s : string;
+        ByteArray: array of Byte;
+      begin
+        TThread.Synchronize(nil,
+          procedure
+          begin
+            AniIndicator2.Enabled := true;
+            AniIndicator2.Visible := true;
+          end
+        );
 
-    //s := String(TNetEncoding.URL.EncodeBytesToString(TIdEncoderMIME.EncodeBytes(IndyTextEncoding_UTF8.GetBytes(ByteArray))));
-    s := '{"document":"'+extractfilename(OpenDialog1.FileName)+'","array":'+arr.toJSON+'}';
-    TFirebaseRest.New.Add(s);
+        try
+          strFileStream := TFileStream.Create(filename, fmOpenRead);
+          arr := TDBXJSONTools.StreamToJSON(strFileStream, 0, strFileStream.Size);
+          strFileStream.Position := 0;
+          SetLength(ByteArray, strFileStream.Size);
+          strFileStream.Read(ByteArray[0], strFileStream.Size);
+          strFileStream.Free;
+          s := '{"document":"'+extractfilename(filename)+'","array":'+arr.toJSON+'}';
+          TFirebaseRest.New.Add(s);
+        Finally
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              ShowMessage('File uploaded successfully!');
+             end
+          );
 
-    //arr.
+        end;
+
+        TThread.Synchronize(nil,
+          procedure
+          begin
+            AniIndicator2.Enabled := false;
+            AniIndicator2.Visible := false;
+           end
+        );
+      end
+    ).Start;
   end
   else
   begin
