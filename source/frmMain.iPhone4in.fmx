@@ -9,32 +9,6 @@ inherited main_iPhone4in: Tmain_iPhone4in
       Size.Width = 320.000000000000000000
       Size.Height = 44.000000000000000000
     end
-    inherited btnBack: TSpeedButton
-      Size.Height = 44.000000000000000000
-    end
-    inherited btnNext: TSpeedButton
-      Position.X = 276.000000000000000000
-      Size.Width = 44.000000000000000000
-      Size.Height = 44.000000000000000000
-    end
-  end
-  inherited TabControl1: TTabControl
-    Size.Width = 320.000000000000000000
-    Size.Height = 460.000000000000000000
-    inherited TabItem1: TTabItem
-      ExplicitSize.cx = 8.000000000000000000
-      ExplicitSize.cy = 8.000000000000000000
-      inherited ListBox1: TListBox
-        Size.Width = 320.000000000000000000
-        Size.Height = 460.000000000000000000
-        Viewport.Width = 316.000000000000000000
-        Viewport.Height = 456.000000000000000000
-      end
-    end
-    inherited TabItem2: TTabItem
-      ExplicitSize.cx = 8.000000000000000000
-      ExplicitSize.cy = 8.000000000000000000
-    end
   end
   inherited BottomToolBar: TToolBar
     Position.Y = 504.000000000000000000
@@ -44,6 +18,20 @@ inherited main_iPhone4in: Tmain_iPhone4in
       Position.X = 276.000000000000000000
       Size.Width = 44.000000000000000000
       Size.Height = 44.000000000000000000
+    end
+    inherited SpeedButton2: TSpeedButton
+      Position.Y = 9.000000000000000000
+      Size.Width = 26.000000000000000000
+      Size.Height = 26.000000000000000000
+    end
+  end
+  inherited ListBox1: TListBox
+    Size.Width = 320.000000000000000000
+    Size.Height = 460.000000000000000000
+    Viewport.Width = 320.000000000000000000
+    Viewport.Height = 460.000000000000000000
+    inherited AniIndicator2: TAniIndicator
+      Enabled = True
     end
   end
 end

@@ -8,7 +8,7 @@ uses
   FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
   lib.firebase.rest, DBXJSON, System.JSON, Data.DBXJSONCommon, lib.document, generics.collections,
-  FMX.Layouts, FMX.ListBox, FMX.WebBrowser;
+  FMX.Layouts, FMX.ListBox, FMX.WebBrowser, FMX.Ani;
 
 type
   Tmain = class(TForm)
@@ -17,22 +17,18 @@ type
     TitleAction: TControlAction;
     NextTabAction1: TNextTabAction;
     TopToolBar: TToolBar;
-    btnBack: TSpeedButton;
     ToolBarLabel: TLabel;
-    btnNext: TSpeedButton;
-    TabControl1: TTabControl;
-    TabItem1: TTabItem;
-    TabItem2: TTabItem;
     BottomToolBar: TToolBar;
     Refresh: TAction;
     SpeedButton1: TSpeedButton;
     ListBox1: TListBox;
-    WebBrowser1: TWebBrowser;
-    procedure FormCreate(Sender: TObject);
-    procedure TitleActionUpdate(Sender: TObject);
-    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
+    SpeedButton2: TSpeedButton;
+    Upload: TAction;
+    AniIndicator2: TAniIndicator;
+    FloatAnimation2: TFloatAnimation;
     procedure RefreshExecute(Sender: TObject);
     procedure ListBoxItem1Click(Sender: TObject);
+    procedure UploadExecute(Sender: TObject);
   private
     function LoadDocuments(jsonString: string): TList<IDocument>;
     { Private declarations }
@@ -52,39 +48,13 @@ uses
    Androidapi.JNI.GraphicsContentViewText,
    Androidapi.Helpers,
    Androidapi.JNI.JavaTypes,
-   Androidapi.JNI.Net
+   Androidapi.JNI.Net,
 {$ENDIF}
-, System.IOUtils;
+ System.IOUtils, System.Threading, lib.runThread;
 
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
 {$R *.iPhone4in.fmx IOS}
-
-procedure Tmain.TitleActionUpdate(Sender: TObject);
-begin
-  if Sender is TCustomAction then
-  begin
-    if TabControl1.ActiveTab <> nil then
-      TCustomAction(Sender).Text := TabControl1.ActiveTab.Text
-    else
-      TCustomAction(Sender).Text := '';
-  end;
-end;
-
-procedure Tmain.FormCreate(Sender: TObject);
-begin
-  { This defines the default active tab at runtime }
-  TabControl1.First(TTabTransition.None);
-end;
-
-procedure Tmain.FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
-begin
-  if (Key = vkHardwareBack) and (TabControl1.TabIndex <> 0) then
-  begin
-    TabControl1.First;
-    Key := 0;
-  end;
-end;
 
 procedure Tmain.RefreshExecute(Sender: TObject);
 var
@@ -92,12 +62,47 @@ var
   List : TList<IDocument>;
   i: Integer;
   ListBoxItem : TListBoxItem;
+  aTask: array of ITask;
 begin
   //Load files from the cloud
-  firebase := TFirebaseRest.New.GetCollection;
-  List := LoadDocuments(firebase);
+//  firebase := TFirebaseRest.New.GetCollection;
+  Setlength (aTask ,1);
+  aTask[0] := TTask.Create(
+      procedure
+      var
+        return : string;
+      begin
+        TThread.Synchronize(nil,
+          procedure
+          begin
+            AniIndicator2.Enabled := true;
+            AniIndicator2.Visible := true;
+          end
+        );
 
+        try
+          return := TFirebaseRest.New.GetCollection;
+        Finally
+
+        end;
+
+        TThread.Synchronize(nil,
+          procedure
+          begin
+            firebase := return;
+            AniIndicator2.Enabled := false;
+            AniIndicator2.Visible := false;
+           end
+        );
+      end
+    );
+
+  aTask[0].Start;
+  TTask.WaitForAll(aTask);
+//  TTask.WaitForAll(aTask);
+  List := LoadDocuments(firebase);
   ListBox1.BeginUpdate;
+  Listbox1.Clear;
   for i := 0 to list.Count-1 do
   begin
     ListBoxItem := TListBoxItem.Create(ListBox1);
@@ -108,6 +113,11 @@ begin
     ListBox1.AddObject(ListBoxItem);
   end;
   ListBox1.EndUpdate;
+end;
+
+procedure Tmain.UploadExecute(Sender: TObject);
+begin
+//
 end;
 
 procedure Tmain.ListBoxItem1Click(Sender: TObject);
@@ -129,7 +139,6 @@ begin
     intent.setDataAndType(URI,StringToJString('application/pdf'));
     SharedActivity.startActivity(intent);
   {$ENDIF}
-  TabControl1.ActiveTab := TabItem2;
 end;
 
 function Tmain.LoadDocuments(jsonString : string) : TList<IDocument>;

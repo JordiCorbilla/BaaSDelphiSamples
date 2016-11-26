@@ -7,14 +7,13 @@ object main: Tmain
   FormFactor.Width = 1440
   FormFactor.Height = 900
   FormFactor.Devices = [Desktop]
-  OnCreate = FormCreate
   DesignerMasterStyle = 0
   object TopToolBar: TToolBar
     Anchors = []
     Size.Width = 384.000000000000000000
     Size.Height = 48.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 0
+    TabOrder = 1
     object ToolBarLabel: TLabel
       Action = TitleAction
       Align = Contents
@@ -24,97 +23,16 @@ object main: Tmain
       Size.PlatformDefault = False
       StyleLookup = 'toollabel'
       TextSettings.HorzAlign = Center
-      Text = 'List of Files'
+      Text = 'Cloud Storage'
       Visible = True
-    end
-    object btnBack: TSpeedButton
-      Action = PreviousTabAction1
-      Align = MostLeft
-      Enabled = True
-      ImageIndex = -1
-      Size.Width = 48.000000000000000000
-      Size.Height = 48.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'backtoolbutton'
-      Visible = True
-    end
-    object btnNext: TSpeedButton
-      Action = NextTabAction1
-      Align = MostRight
-      Enabled = True
-      ImageIndex = -1
-      Position.X = 336.000000000000000000
-      Size.Width = 48.000000000000000000
-      Size.Height = 48.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'nexttoolbutton'
-      Visible = True
-    end
-  end
-  object TabControl1: TTabControl
-    Align = Client
-    FullSize = True
-    Size.Width = 384.000000000000000000
-    Size.Height = 471.000000000000000000
-    Size.PlatformDefault = False
-    TabHeight = 49.000000000000000000
-    TabIndex = 0
-    TabOrder = 1
-    TabPosition = None
-    object TabItem1: TTabItem
-      CustomIcon = <
-        item
-        end>
-      IsSelected = True
-      Size.Width = 8.000000000000000000
-      Size.Height = 8.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = ''
-      TabOrder = 0
-      Text = 'Caption Tab Item #1'
-      ExplicitSize.cx = 8.000000000000000000
-      ExplicitSize.cy = 8.000000000000000000
-      object ListBox1: TListBox
-        Align = Client
-        Size.Width = 384.000000000000000000
-        Size.Height = 471.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 0
-        DisableFocusEffect = True
-        DefaultItemStyles.ItemStyle = ''
-        DefaultItemStyles.GroupHeaderStyle = ''
-        DefaultItemStyles.GroupFooterStyle = ''
-        Viewport.Width = 380.000000000000000000
-        Viewport.Height = 467.000000000000000000
-      end
-    end
-    object TabItem2: TTabItem
-      CustomIcon = <
-        item
-        end>
-      IsSelected = False
-      Size.Width = 8.000000000000000000
-      Size.Height = 8.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = ''
-      TabOrder = 0
-      Text = 'Caption Tab Item #2'
-      ExplicitSize.cx = 8.000000000000000000
-      ExplicitSize.cy = 8.000000000000000000
-      object WebBrowser1: TWebBrowser
-        Align = Client
-        Size.Width = 50.000000000000000000
-        Size.Height = 50.000000000000000000
-        Size.PlatformDefault = False
-      end
     end
   end
   object BottomToolBar: TToolBar
     Align = Bottom
     Anchors = [akLeft]
-    Position.Y = 519.000000000000000000
+    Position.Y = 512.000000000000000000
     Size.Width = 384.000000000000000000
-    Size.Height = 48.000000000000000000
+    Size.Height = 55.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'bottomtoolbar'
     TabOrder = 2
@@ -125,10 +43,51 @@ object main: Tmain
       ImageIndex = -1
       Position.X = 336.000000000000000000
       Size.Width = 48.000000000000000000
-      Size.Height = 48.000000000000000000
+      Size.Height = 55.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'refreshtoolbutton'
       Visible = True
+    end
+    object SpeedButton2: TSpeedButton
+      Action = Upload
+      Align = MostLeft
+      Enabled = True
+      ImageIndex = -1
+      Size.Width = 48.000000000000000000
+      Size.Height = 55.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'additembutton'
+      Visible = True
+    end
+  end
+  object ListBox1: TListBox
+    Align = Client
+    Size.Width = 384.000000000000000000
+    Size.Height = 464.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 380.000000000000000000
+    Viewport.Height = 460.000000000000000000
+    object AniIndicator2: TAniIndicator
+      Align = Client
+      Enabled = True
+      Size.Width = 380.000000000000000000
+      Size.Height = 460.000000000000000000
+      Size.PlatformDefault = False
+      Visible = False
+      object FloatAnimation2: TFloatAnimation
+        Enabled = True
+        Duration = 0.200000002980232200
+        Loop = True
+        PropertyName = 'RotationAngle'
+        StartValue = 0.000000000000000000
+        StopValue = 0.000000000000000000
+        Trigger = 'IsVisible=true'
+      end
     end
   end
   object ActionList1: TActionList
@@ -137,20 +96,21 @@ object main: Tmain
     object TitleAction: TControlAction
       Category = 'Tab'
       Text = 'TitleAction'
-      OnUpdate = TitleActionUpdate
     end
     object PreviousTabAction1: TPreviousTabAction
       Category = 'Tab'
-      TabControl = TabControl1
       ShortCut = 137
     end
     object NextTabAction1: TNextTabAction
       Category = 'Tab'
-      TabControl = TabControl1
     end
     object Refresh: TAction
       Text = 'Refresh'
       OnExecute = RefreshExecute
+    end
+    object Upload: TAction
+      Text = 'Upload'
+      OnExecute = UploadExecute
     end
   end
 end

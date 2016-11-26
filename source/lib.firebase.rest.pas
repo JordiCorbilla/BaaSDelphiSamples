@@ -73,6 +73,8 @@ begin
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
     IdHTTP := TIdHTTP.Create(nil);
     try
+//      IdHTTP.ReadTimeout := 30000;
+//      IdHTTP.HandleRedirects := True;
       IdHTTP.IOHandler := IdIOHandler;
       IdHTTP.Request.Connection := 'Keep-Alive';
       IdIOHandler.SSLOptions.Method := sslvSSLv23;
@@ -92,7 +94,12 @@ end;
 
 constructor TFirebaseRest.Create;
 begin
+{$IFDEF ANDROID}
+  FOptions := TOptions.Create;
+  FOptions.FirebaseAuth := '7NZu878Wr56kWm4dSnVIoX52nd02zIRFsoGs7O1y';
+{$ELSE}
   FOptions := TOptions.New.Load;
+{$ENDIF}
 end;
 
 function TFirebaseRest.Delete: boolean;
@@ -109,6 +116,8 @@ begin
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
     IdHTTP := TIdHTTP.Create(nil);
     try
+//      IdHTTP.ReadTimeout := 30000;
+//      IdHTTP.HandleRedirects := True;
       IdHTTP.IOHandler := IdIOHandler;
       IdHTTP.Request.Connection := 'Keep-Alive';
       IdIOHandler.SSLOptions.Method := sslvSSLv23;
@@ -143,6 +152,8 @@ begin
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
     IdHTTP := TIdHTTP.Create(nil);
     try
+//      IdHTTP.ReadTimeout := 30000;
+//      IdHTTP.HandleRedirects := True;
       IdHTTP.IOHandler := IdIOHandler;
       IdHTTP.ReadTimeout := IdTimeoutInfinite;
       IdHTTP.Request.Connection := 'Keep-Alive';
