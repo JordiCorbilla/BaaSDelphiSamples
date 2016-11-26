@@ -53,6 +53,7 @@ type
     Upload: TAction;
     AniIndicator2: TAniIndicator;
     FloatAnimation2: TFloatAnimation;
+    OpenDialog1: TOpenDialog;
     procedure RefreshExecute(Sender: TObject);
     procedure ListBoxItem1Click(Sender: TObject);
     procedure UploadExecute(Sender: TObject);
@@ -135,17 +136,58 @@ begin
 end;
 
 procedure Tmain.UploadExecute(Sender: TObject);
+var
+  strFileStream: TFileStream;
+  arr : TJSONArray;
+  s : string;
+  ByteArray: array of Byte;
 begin
-//
+  OpenDialog1.InitialDir := GetCurrentDir;
+
+  // Only allow existing files to be selected
+  //OpenDialog1.Options := [ofFileMustExist];
+
+  // Allow only .dpr and .pas files to be selected
+  OpenDialog1.Filter :=
+    'PDF Files|*.pdf|MS Word|*.docx';
+
+  // Select pascal files as the starting filter type
+  //OpenDialog1.FilterIndex := 2;
+
+  // Display the open file dialog
+  if OpenDialog1.Execute then
+  begin
+    //ShowMessage('File : '+OpenDialog1.FileName);
+    strFileStream := TFileStream.Create(OpenDialog1.FileName, fmOpenRead);
+    arr := TDBXJSONTools.StreamToJSON(strFileStream, 0, strFileStream.Size);
+
+    strFileStream.Position := 0;
+    SetLength(ByteArray, strFileStream.Size);
+    strFileStream.Read(ByteArray[0], strFileStream.Size);
+    strFileStream.Free;
+
+    //s := String(TNetEncoding.URL.EncodeBytesToString(TIdEncoderMIME.EncodeBytes(IndyTextEncoding_UTF8.GetBytes(ByteArray))));
+    s := '{"document":"'+extractfilename(OpenDialog1.FileName)+'","array":'+arr.toJSON+'}';
+    TFirebaseRest.New.Add(s);
+
+    //arr.
+  end
+  else
+  begin
+    ShowMessage('Open file was cancelled');
+  end;
+
+  // Free up the dialog
+  OpenDialog1.Free;
 end;
 
 procedure Tmain.ListBoxItem1Click(Sender: TObject);
 var
-   fName : String;
-   document : TDocument;
+ fName : String;
+ document : TDocument;
 {$IFDEF ANDROID}
-   Intent : JIntent;
-   URI : Jnet_Uri;
+ Intent : JIntent;
+ URI : Jnet_Uri;
 {$ENDIF}
 begin
   //Save the document to the device
