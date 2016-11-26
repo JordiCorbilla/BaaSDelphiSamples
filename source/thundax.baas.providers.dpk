@@ -38,8 +38,7 @@ contains
   lib.parse.rest in 'lib.parse.rest.pas',
   lib.firebase.rest in 'lib.firebase.rest.pas',
   lib.options in 'lib.options.pas',
-  lib.document in 'lib.document.pas',
-  lib.runThread in 'lib.runThread.pas';
+  lib.document in 'lib.document.pas';
 
 end.
 

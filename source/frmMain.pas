@@ -1,3 +1,30 @@
+// Copyright (c) 2016, Jordi Corbilla
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+// - Redistributions of source code must retain the above copyright notice,
+// this list of conditions and the following disclaimer.
+// - Redistributions in binary form must reproduce the above copyright notice,
+// this list of conditions and the following disclaimer in the documentation
+// and/or other materials provided with the distribution.
+// - Neither the name of this library nor the names of its contributors may be
+// used to endorse or promote products derived from this software without
+// specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+// POSSIBILITY OF SUCH DAMAGE.
+
 unit frmMain;
 
 interface
@@ -30,10 +57,7 @@ type
     procedure ListBoxItem1Click(Sender: TObject);
     procedure UploadExecute(Sender: TObject);
   private
-    function LoadDocuments(jsonString: string): TList<IDocument>;
-    { Private declarations }
   public
-    { Public declarations }
   end;
 
 var
@@ -50,27 +74,20 @@ uses
    Androidapi.JNI.JavaTypes,
    Androidapi.JNI.Net,
 {$ENDIF}
- System.IOUtils, System.Threading, lib.runThread;
+ System.IOUtils, System.Threading;
 
 {$R *.fmx}
 {$R *.LgXhdpiPh.fmx ANDROID}
 {$R *.iPhone4in.fmx IOS}
 
 procedure Tmain.RefreshExecute(Sender: TObject);
-var
-  firebase : string;
-  List : TList<IDocument>;
-  i: Integer;
-  ListBoxItem : TListBoxItem;
-  aTask: array of ITask;
 begin
   //Load files from the cloud
-//  firebase := TFirebaseRest.New.GetCollection;
-  Setlength (aTask ,1);
-  aTask[0] := TTask.Create(
+  TTask.Create(
       procedure
       var
         return : string;
+         List : TList<IDocument>;
       begin
         TThread.Synchronize(nil,
           procedure
@@ -83,36 +100,38 @@ begin
         try
           return := TFirebaseRest.New.GetCollection;
         Finally
-
+          List := TDocumentParser.ParseRequestJSON(return);
+          TThread.Synchronize(nil,
+            procedure
+            var
+              i: Integer;
+              ListBoxItem : TListBoxItem;
+            begin
+              ListBox1.BeginUpdate;
+              Listbox1.Clear;
+              for i := 0 to list.Count-1 do
+              begin
+                ListBoxItem := TListBoxItem.Create(ListBox1);
+                ListBoxItem.Text := list[i].FileName;
+                ListBoxItem.Data :=  TDocument(list[i]);
+                ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(1);
+                ListBoxItem.OnClick := ListBoxItem1Click;
+                ListBox1.AddObject(ListBoxItem);
+              end;
+              ListBox1.EndUpdate;
+             end
+          );
         end;
 
         TThread.Synchronize(nil,
           procedure
           begin
-            firebase := return;
             AniIndicator2.Enabled := false;
             AniIndicator2.Visible := false;
            end
         );
       end
-    );
-
-  aTask[0].Start;
-  TTask.WaitForAll(aTask);
-//  TTask.WaitForAll(aTask);
-  List := LoadDocuments(firebase);
-  ListBox1.BeginUpdate;
-  Listbox1.Clear;
-  for i := 0 to list.Count-1 do
-  begin
-    ListBoxItem := TListBoxItem.Create(ListBox1);
-    ListBoxItem.Text := list[i].FileName;
-    ListBoxItem.Data :=  TDocument(list[i]);
-    ListBoxItem.ItemData.Accessory := TListBoxItemData.TAccessory(1);
-    ListBoxItem.OnClick := ListBoxItem1Click;
-    ListBox1.AddObject(ListBoxItem);
-  end;
-  ListBox1.EndUpdate;
+    ).Start;
 end;
 
 procedure Tmain.UploadExecute(Sender: TObject);
@@ -122,16 +141,18 @@ end;
 
 procedure Tmain.ListBoxItem1Click(Sender: TObject);
 var
-   fName       : String;
+   fName : String;
    document : TDocument;
 {$IFDEF ANDROID}
-   Intent      : JIntent;
-   URI         : Jnet_Uri;
+   Intent : JIntent;
+   URI : Jnet_Uri;
 {$ENDIF}
 begin
+  //Save the document to the device
   document := ((Sender as TListBoxItem).Data as TDocument);
   document.Save(TPath.GetSharedDownloadsPath + PathDelim);
   fName := TPath.Combine(TPath.GetSharedDownloadsPath, document.FileName);
+  //IF Android, then call the open file
   {$IFDEF ANDROID}
     URI := TJnet_Uri.JavaClass.parse(StringToJString('file:///' + fName));
     intent := TJIntent.Create;
@@ -139,39 +160,6 @@ begin
     intent.setDataAndType(URI,StringToJString('application/pdf'));
     SharedActivity.startActivity(intent);
   {$ENDIF}
-end;
-
-function Tmain.LoadDocuments(jsonString : string) : TList<IDocument>;
-var
-  s : string;
-  i : integer;
-  j, k : integer;
-  doc : string;
-  name : string;
-  list : TList<IDocument>;
-begin
-  list := TList<IDocument>.Create;
-  s := jsonString;
-  i := 1;
-  while i > 0 do
-  begin
-    i := AnsiPos('array', s);
-    j := AnsiPos('document', s);
-    if ((i > 0) and (j>0)) then
-    begin
-      doc := copy(s, i, j-i);
-      doc := doc.Replace('array":', '');
-      doc := doc.Replace(',"', '');
-      name := AnsiRightStr(s, length(s)-j+1);
-      k := AnsiPos('}', name);
-      name := copy(name, 0, k);
-      name := name.Replace('document":"', '');
-      name := name.Replace('"}', '');
-      s := AnsiRightStr(s, length(s)-(j+k));
-      list.Add(TDocument.New(name, doc));
-    end;
-  end;
-  result := list;
 end;
 
 end.

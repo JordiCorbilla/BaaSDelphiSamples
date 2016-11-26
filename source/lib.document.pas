@@ -29,6 +29,9 @@ unit lib.document;
 
 interface
 
+uses
+  generics.collections;
+
 type
   IDocument = interface
     procedure SetDocument(const Value: string);
@@ -58,10 +61,14 @@ type
     procedure Save(path : string); overload;
   end;
 
+  TDocumentParser = class(TObject)
+    class function ParseRequestJSON(json : string) : TList<IDocument>;
+  end;
+
 implementation
 
 uses
-  System.Classes, System.JSON, Data.DBXJSONCommon, System.SysUtils;
+  System.Classes, System.JSON, Data.DBXJSONCommon, System.SysUtils, System.StrUtils;
 
 { TDocument }
 
@@ -136,6 +143,41 @@ end;
 procedure TDocument.SetFileName(const Value: string);
 begin
   FFileName := Value;
+end;
+
+{ TDocumentParser }
+
+class function TDocumentParser.ParseRequestJSON(json: string): TList<IDocument>;
+var
+  s : string;
+  i : integer;
+  j, k : integer;
+  doc : string;
+  name : string;
+  list : TList<IDocument>;
+begin
+  list := TList<IDocument>.Create;
+  s := json;
+  i := 1;
+  while i > 0 do
+  begin
+    i := AnsiPos('array', s);
+    j := AnsiPos('document', s);
+    if ((i > 0) and (j>0)) then
+    begin
+      doc := copy(s, i, j-i);
+      doc := doc.Replace('array":', '');
+      doc := doc.Replace(',"', '');
+      name := AnsiRightStr(s, length(s)-j+1);
+      k := AnsiPos('}', name);
+      name := copy(name, 0, k);
+      name := name.Replace('document":"', '');
+      name := name.Replace('"}', '');
+      s := AnsiRightStr(s, length(s)-(j+k));
+      list.Add(TDocument.New(name, doc));
+    end;
+  end;
+  result := list;
 end;
 
 end.
