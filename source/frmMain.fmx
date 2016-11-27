@@ -88,7 +88,6 @@ object main: Tmain
         TextSettings.Font.Size = 25.000000000000000000
         TextSettings.HorzAlign = Center
         Text = 'Please wait'
-        Visible = False
       end
       object AniIndicator2: TAniIndicator
         Align = Center
