@@ -8,6 +8,7 @@ Code samples for **BaaS (Kinvey)**, **BaaS (Firebase)** and **PaaS (Parse.com)**
   - [Creating your own self-hosted Parse server](http://thundaxsoftware.blogspot.co.uk/2016/05/creating-your-own-self-hosted-parse.html)
   - [Deploying Parse server to Heroku](http://thundaxsoftware.blogspot.co.uk/2016/05/deploying-parse-server-to-heroku.html)
   - [Sending REST API messages with Delphi to Parse.com](http://thundaxsoftware.blogspot.co.uk/2015/12/sending-rest-api-messages-with-delphi.html)
+  - [Firebase file streaming with Delphi](http://thundaxsoftware.blogspot.co.uk/2016/11/firebase-file-streaming-with-delphi.html)
 
 **Win64 example app**
 
