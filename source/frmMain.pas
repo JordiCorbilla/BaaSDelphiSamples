@@ -54,6 +54,8 @@ type
     AniIndicator2: TAniIndicator;
     FloatAnimation2: TFloatAnimation;
     OpenDialog1: TOpenDialog;
+    Panel1: TPanel;
+    Label1: TLabel;
     procedure RefreshExecute(Sender: TObject);
     procedure ListBoxItem1Click(Sender: TObject);
     procedure UploadExecute(Sender: TObject);
@@ -95,6 +97,7 @@ begin
           begin
             AniIndicator2.Enabled := true;
             AniIndicator2.Visible := true;
+            Panel1.Visible := true;
           end
         );
 
@@ -129,6 +132,7 @@ begin
           begin
             AniIndicator2.Enabled := false;
             AniIndicator2.Visible := false;
+            Panel1.Visible := false;
            end
         );
       end
@@ -154,13 +158,15 @@ begin
   if OpenDialog1.Execute then
   begin
     filename := OpenDialog1.FileName;
+    // Free up the dialog
+    OpenDialog1.Free;
 
     TTask.Create(
       procedure
       var
         strFileStream: TFileStream;
         arr : TJSONArray;
-        s : string;
+        envelope : string;
         ByteArray: array of Byte;
       begin
         TThread.Synchronize(nil,
@@ -168,6 +174,7 @@ begin
           begin
             AniIndicator2.Enabled := true;
             AniIndicator2.Visible := true;
+            Panel1.Visible := true;
           end
         );
 
@@ -178,8 +185,8 @@ begin
           SetLength(ByteArray, strFileStream.Size);
           strFileStream.Read(ByteArray[0], strFileStream.Size);
           strFileStream.Free;
-          s := '{"document":"'+extractfilename(filename)+'","array":'+arr.toJSON+'}';
-          TFirebaseRest.New.Add(s);
+          envelope := '{"document":"'+extractfilename(filename)+'","array":'+arr.toJSON+'}';
+          TFirebaseRest.New.Add(envelope);
         Finally
           TThread.Synchronize(nil,
             procedure
@@ -195,31 +202,35 @@ begin
           begin
             AniIndicator2.Enabled := false;
             AniIndicator2.Visible := false;
+            Panel1.Visible := false;
            end
         );
       end
     ).Start;
+
   end
   else
   begin
     ShowMessage('Open file was cancelled');
   end;
 
-  // Free up the dialog
-  OpenDialog1.Free;
+
 end;
 
 procedure Tmain.ListBoxItem1Click(Sender: TObject);
 var
  fName : String;
  document : TDocument;
+ item : TListBoxItem;
 {$IFDEF ANDROID}
  Intent : JIntent;
  URI : Jnet_Uri;
 {$ENDIF}
 begin
+  item := (Sender as TListBoxItem);
+  item.IsSelected := true;
   //Save the document to the device
-  document := ((Sender as TListBoxItem).Data as TDocument);
+  document := (item.Data as TDocument);
   document.Save(TPath.GetSharedDownloadsPath + PathDelim);
   fName := TPath.Combine(TPath.GetSharedDownloadsPath, document.FileName);
   //IF Android, then call the open file

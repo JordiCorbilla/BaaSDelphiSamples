@@ -14,9 +14,6 @@ inherited main_LgXhdpiPh: Tmain_LgXhdpiPh
     inherited SpeedButton1: TSpeedButton
       Position.X = 402.000000000000000000
     end
-    inherited AniIndicator2: TAniIndicator
-      Position.Y = 192.000000000000000000
-    end
   end
   inherited ListBox1: TListBox
     Size.Width = 450.000000000000000000

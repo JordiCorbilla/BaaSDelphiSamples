@@ -96,7 +96,7 @@ constructor TFirebaseRest.Create;
 begin
 {$IFDEF ANDROID}
   FOptions := TOptions.Create;
-  FOptions.FirebaseAuth := '7NZu878Wr56kWm4dSnVIoX52nd02zIRFsoGs7O1y';
+  FOptions.FirebaseAuth := 'yourWebAPIKey';
 {$ELSE}
   FOptions := TOptions.New.Load;
 {$ENDIF}
