@@ -33,7 +33,7 @@ uses
   lib.urls, IdHTTP, IdIOHandler, IdIOHandlerStream,
   IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdGlobal,
   System.SysUtils, System.Variants, System.Classes, lib.options,
-  IdSSLOpenSSLHeaders_Static;
+  IdSSLOpenSSLHeaders_Static, System.IOUtils;
 
 type
   IFirebaseRest = interface
@@ -148,7 +148,6 @@ var
   response : string;
 begin
   try
-    //IdOpenSSLSetLibPath(TPath.GetDocumentsPath);
     IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
     IdIOHandler.ReadTimeout := IdTimeoutInfinite;
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;

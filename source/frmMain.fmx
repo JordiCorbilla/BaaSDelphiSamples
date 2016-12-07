@@ -7,6 +7,7 @@ object main: Tmain
   FormFactor.Width = 1440
   FormFactor.Height = 900
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   DesignerMasterStyle = 0
   object TopToolBar: TToolBar
     Anchors = []
@@ -59,6 +60,14 @@ object main: Tmain
       StyleLookup = 'additembutton'
       Visible = True
     end
+    object Button1: TButton
+      Position.X = 160.000000000000000000
+      Position.Y = 16.000000000000000000
+      TabOrder = 1
+      Text = 'Button1'
+      Visible = False
+      OnClick = Button1Click
+    end
   end
   object ListBox1: TListBox
     Align = Client
@@ -106,6 +115,14 @@ object main: Tmain
           Trigger = 'IsVisible=true'
         end
       end
+    end
+    object Label2: TLabel
+      Position.X = 16.000000000000000000
+      Position.Y = 376.000000000000000000
+      Size.Width = 353.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Label2'
     end
   end
   object OpenDialog1: TOpenDialog

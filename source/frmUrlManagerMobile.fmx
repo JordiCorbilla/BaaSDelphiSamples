@@ -43,11 +43,6 @@ object Form2: TForm2
     TabIndex = 0
     TabOrder = 12
     TabPosition = PlatformDefault
-    Sizes = (
-      329s
-      368s
-      329s
-      368s)
     object tabCloud: TTabItem
       CustomIcon = <
         item
@@ -89,15 +84,15 @@ object Form2: TForm2
       ExplicitSize.cy = 49.000000000000000000
       object Panel1: TPanel
         Align = Client
-        Size.Width = 329.000000000000000000
-        Size.Height = 368.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object lblUser: TLabel
           AutoSize = True
           Position.X = 24.000000000000000000
           Position.Y = 24.000000000000000000
-          Size.Width = 57.000000000000000000
+          Size.Width = 63.000000000000000000
           Size.Height = 22.000000000000000000
           Size.PlatformDefault = False
           TextSettings.WordWrap = False
@@ -107,7 +102,7 @@ object Form2: TForm2
           AutoSize = True
           Position.X = 24.000000000000000000
           Position.Y = 72.000000000000000000
-          Size.Width = 55.000000000000000000
+          Size.Width = 60.000000000000000000
           Size.Height = 22.000000000000000000
           Size.PlatformDefault = False
           TextSettings.WordWrap = False
@@ -117,7 +112,7 @@ object Form2: TForm2
           AutoSize = True
           Position.X = 24.000000000000000000
           Position.Y = 120.000000000000000000
-          Size.Width = 55.000000000000000000
+          Size.Width = 60.000000000000000000
           Size.Height = 22.000000000000000000
           Size.PlatformDefault = False
           TextSettings.WordWrap = False

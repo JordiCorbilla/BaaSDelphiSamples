@@ -56,9 +56,13 @@ type
     OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     Label1: TLabel;
+    Button1: TButton;
+    Label2: TLabel;
     procedure RefreshExecute(Sender: TObject);
     procedure ListBoxItem1Click(Sender: TObject);
     procedure UploadExecute(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
   public
   end;
@@ -69,7 +73,7 @@ var
 implementation
 
 uses
-  StrUtils,
+  StrUtils, IdSSLOpenSSLHeaders,
 
 {$IFDEF ANDROID}
    Androidapi.JNI.GraphicsContentViewText,
@@ -102,7 +106,18 @@ begin
         );
 
         try
-          return := TFirebaseRest.New.GetCollection;
+          try
+            return := TFirebaseRest.New.GetCollection;
+          except
+            on E : Exception do
+            TThread.Synchronize(nil,
+            procedure
+            begin
+              label2.Text := E.Message;
+            end
+            );
+          end;
+
         Finally
           List := TDocumentParser.ParseRequestJSON(return);
           TThread.Synchronize(nil,
@@ -215,6 +230,17 @@ begin
   end;
 
 
+end;
+
+procedure Tmain.Button1Click(Sender: TObject);
+begin
+  ShowMessage(TPath.GetDocumentsPath);
+end;
+
+procedure Tmain.FormCreate(Sender: TObject);
+begin
+  IdOpenSSLSetLibPath(TPath.GetDocumentsPath);
+  label2.Text := '';
 end;
 
 procedure Tmain.ListBoxItem1Click(Sender: TObject);
