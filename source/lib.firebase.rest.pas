@@ -32,7 +32,8 @@ interface
 uses
   lib.urls, IdHTTP, IdIOHandler, IdIOHandlerStream,
   IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdGlobal,
-  System.SysUtils, System.Variants, System.Classes, lib.options;
+  System.SysUtils, System.Variants, System.Classes, lib.options,
+  IdSSLOpenSSLHeaders_Static;
 
 type
   IFirebaseRest = interface
@@ -96,7 +97,7 @@ constructor TFirebaseRest.Create;
 begin
 {$IFDEF ANDROID}
   FOptions := TOptions.Create;
-  FOptions.FirebaseAuth := 'yourWebAPIKey';
+  FOptions.FirebaseAuth := '7NZu878Wr56kWm4dSnVIoX52nd02zIRFsoGs7O1y';
 {$ELSE}
   FOptions := TOptions.New.Load;
 {$ENDIF}
@@ -147,6 +148,7 @@ var
   response : string;
 begin
   try
+    //IdOpenSSLSetLibPath(TPath.GetDocumentsPath);
     IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
     IdIOHandler.ReadTimeout := IdTimeoutInfinite;
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
