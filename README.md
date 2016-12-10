@@ -1,6 +1,6 @@
 # BaaS Delphi Samples
 
-[![Delphi version](https://img.shields.io/badge/delphi-Berlin10.1update2-red.svg)](https://app.box.com/s/p7hwuaic1qsm14juf3pmuojv0ko98ok5)
+[![Delphi version](https://img.shields.io/badge/delphi-Berlin10.1update2-red.svg?style=plastic)](https://app.box.com/s/p7hwuaic1qsm14juf3pmuojv0ko98ok5)
 ![License](https://img.shields.io/badge/license-MIT-green.svg?style=plastic)
 
 ![](https://3.bp.blogspot.com/-_QZgeowOPYQ/V2xA5wUUHLI/AAAAAAAAFgQ/6Ca1guejVVw2U1s3EYi56bGkshge8b02ACLcB/s1600/mbaas.png)
