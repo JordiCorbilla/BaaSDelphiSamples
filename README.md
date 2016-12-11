@@ -1,8 +1,11 @@
-# BaaS Delphi Samples
+# BaaS Delphi Indy Samples over https
 
-[![Delphi version](https://img.shields.io/badge/delphi-Berlin10.1update2-red.svg)](https://app.box.com/s/p7hwuaic1qsm14juf3pmuojv0ko98ok5)
+[![Delphi version](https://img.shields.io/badge/delphi-Berlin10.1update2-red.svg?style=plastic)](https://app.box.com/s/p7hwuaic1qsm14juf3pmuojv0ko98ok5)
+![License](https://img.shields.io/badge/license-MIT-green.svg?style=plastic)
 
 ![](https://3.bp.blogspot.com/-_QZgeowOPYQ/V2xA5wUUHLI/AAAAAAAAFgQ/6Ca1guejVVw2U1s3EYi56bGkshge8b02ACLcB/s1600/mbaas.png)
+![](https://3.bp.blogspot.com/-R9V-4Cq47sI/WDqsB6Lbk0I/AAAAAAAAF1Q/DQP6AkGaJxstXBpLLN-6jiVgU2AkkoXYgCLcB/s1600/firebasediagram.png)
+
 ==============
 Code samples for **BaaS ([Kinvey](https://www.kinvey.com/))**, **BaaS ([Firebase](https://firebase.google.com/))** and **PaaS ([Parse.com](http://parse.com/))** using Delphi 10.1 Berlin Update 2 and [Indy Library](http://www.indyproject.org/index.en.aspx)
 --------------
@@ -120,7 +123,7 @@ end;
 
     The MIT License (MIT)
     
-    Copyright (c) 2015 Jordi Corbilla
+    Copyright (c) 2016 Jordi Corbilla
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
