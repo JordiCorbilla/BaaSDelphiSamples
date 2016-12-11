@@ -239,7 +239,7 @@ end;
 
 procedure Tmain.FormCreate(Sender: TObject);
 begin
-  //IdOpenSSLSetLibPath(TPath.GetDocumentsPath);
+  IdOpenSSLSetLibPath(TPath.GetDocumentsPath);
   label2.Text := '';
 end;
 

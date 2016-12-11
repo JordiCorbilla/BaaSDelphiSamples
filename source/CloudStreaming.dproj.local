@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2016/11/06 19:32:37.000.786,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\thundax.firebase.dproj=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterNavigation.dproj</Transaction>
-    <Transaction>2016/11/06 19:32:51.000.027,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\frmMain.pas=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterFormwithNavigation.pas</Transaction>
-    <Transaction>2016/11/06 19:32:51.000.027,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\frmMain.fmx=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterFormwithNavigation.fmx</Transaction>
-    <Transaction>2016/11/26 11:21:34.000.342,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\FirebaseCloud.dproj=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\thundax.firebase.dproj</Transaction>
-    <Transaction>2016/11/26 11:21:51.000.069,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\CloudStreaming.dproj=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\FirebaseCloud.dproj</Transaction>
+    <Transaction>2016/11/06 19:32:37.000.786,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterNavigation.dproj=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\thundax.firebase.dproj</Transaction>
+    <Transaction>2016/11/06 19:32:51.000.027,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterFormwithNavigation.fmx=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\frmMain.fmx</Transaction>
+    <Transaction>2016/11/06 19:32:51.000.027,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterFormwithNavigation.pas=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\frmMain.pas</Transaction>
+    <Transaction>2016/11/26 11:21:34.000.342,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\thundax.firebase.dproj=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\FirebaseCloud.dproj</Transaction>
+    <Transaction>2016/11/26 11:21:51.000.069,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\FirebaseCloud.dproj=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\CloudStreaming.dproj</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile Android="ZY223PNH2N"/>

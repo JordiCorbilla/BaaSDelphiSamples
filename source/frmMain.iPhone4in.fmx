@@ -20,14 +20,15 @@ inherited main_iPhone4in: Tmain_iPhone4in
       Size.Height = 44.000000000000000000
     end
     inherited SpeedButton2: TSpeedButton
+      Position.Y = 9.000000000000000000
       Size.Width = 26.000000000000000000
-      Size.Height = 44.000000000000000000
+      Size.Height = 26.000000000000000000
     end
   end
   inherited ListBox1: TListBox
     Size.Width = 320.000000000000000000
     Size.Height = 460.000000000000000000
-    Viewport.Width = 316.000000000000000000
-    Viewport.Height = 456.000000000000000000
+    Viewport.Width = 320.000000000000000000
+    Viewport.Height = 460.000000000000000000
   end
 end

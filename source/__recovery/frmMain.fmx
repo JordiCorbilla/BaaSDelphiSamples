@@ -1,0 +1,153 @@
+object main: Tmain
+  Left = 0
+  Top = 0
+  Caption = 'Home'
+  ClientHeight = 568
+  ClientWidth = 384
+  FormFactor.Width = 1440
+  FormFactor.Height = 900
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object TopToolBar: TToolBar
+    Anchors = []
+    Size.Width = 384.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object ToolBarLabel: TLabel
+      Action = TitleAction
+      Align = Contents
+      Enabled = True
+      Size.Width = 384.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toollabel'
+      TextSettings.HorzAlign = Center
+      Text = 'Firebase Cloud Storage (by Jordi Corbilla)'
+      Visible = True
+    end
+  end
+  object BottomToolBar: TToolBar
+    Align = Bottom
+    Anchors = [akLeft]
+    Position.Y = 520.000000000000000000
+    Size.Width = 384.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'bottomtoolbar'
+    TabOrder = 2
+    object SpeedButton1: TSpeedButton
+      Action = Refresh
+      Align = MostRight
+      Enabled = True
+      ImageIndex = -1
+      Position.X = 336.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'refreshtoolbutton'
+      Visible = True
+    end
+    object SpeedButton2: TSpeedButton
+      Action = Upload
+      Align = MostLeft
+      Enabled = True
+      ImageIndex = -1
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'additembutton'
+      Visible = True
+    end
+    object Button1: TButton
+      Position.X = 160.000000000000000000
+      Position.Y = 16.000000000000000000
+      TabOrder = 1
+      Text = 'Button1'
+      Visible = False
+      OnClick = Button1Click
+    end
+  end
+  object ListBox1: TListBox
+    Align = Client
+    Size.Width = 384.000000000000000000
+    Size.Height = 472.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 380.000000000000000000
+    Viewport.Height = 468.000000000000000000
+    object Panel1: TPanel
+      Align = Client
+      Size.Width = 380.000000000000000000
+      Size.Height = 468.000000000000000000
+      Size.PlatformDefault = False
+      Visible = False
+      TabOrder = 0
+      object Label1: TLabel
+        Align = Client
+        StyledSettings = [Family, Style, FontColor]
+        Size.Width = 380.000000000000000000
+        Size.Height = 468.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 25.000000000000000000
+        TextSettings.HorzAlign = Center
+        Text = 'Please wait'
+      end
+      object AniIndicator2: TAniIndicator
+        Align = Center
+        Enabled = True
+        Size.Width = 244.000000000000000000
+        Size.Height = 236.000000000000000000
+        Size.PlatformDefault = False
+        Visible = False
+        object FloatAnimation2: TFloatAnimation
+          Enabled = True
+          Duration = 0.200000002980232200
+          Loop = True
+          PropertyName = 'RotationAngle'
+          StartValue = 0.000000000000000000
+          StopValue = 0.000000000000000000
+          Trigger = 'IsVisible=true'
+        end
+      end
+    end
+    object Label2: TLabel
+      Position.X = 16.000000000000000000
+      Position.Y = 376.000000000000000000
+      Size.Width = 353.000000000000000000
+      Size.Height = 17.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Label2'
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 176
+    Top = 136
+  end
+  object ActionList1: TActionList
+    Left = 176
+    Top = 56
+    object TitleAction: TControlAction
+      Category = 'Tab'
+      Text = 'TitleAction'
+    end
+    object PreviousTabAction1: TPreviousTabAction
+      Category = 'Tab'
+      ShortCut = 137
+    end
+    object NextTabAction1: TNextTabAction
+      Category = 'Tab'
+    end
+    object Refresh: TAction
+      OnExecute = RefreshExecute
+    end
+    object Upload: TAction
+      OnExecute = UploadExecute
+    end
+  end
+end
