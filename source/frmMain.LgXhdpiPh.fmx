@@ -20,5 +20,9 @@ inherited main_LgXhdpiPh: Tmain_LgXhdpiPh
     Size.Height = 599.000000000000000000
     Viewport.Width = 450.000000000000000000
     Viewport.Height = 599.000000000000000000
+    inherited Memo1: TMemo
+      Viewport.Width = 337.000000000000000000
+      Viewport.Height = 89.000000000000000000
+    end
   end
 end

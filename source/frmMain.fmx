@@ -116,13 +116,17 @@ object main: Tmain
         end
       end
     end
-    object Label2: TLabel
+    object Memo1: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
       Position.X = 16.000000000000000000
-      Position.Y = 376.000000000000000000
-      Size.Width = 353.000000000000000000
-      Size.Height = 17.000000000000000000
+      Position.Y = 360.000000000000000000
+      Size.Width = 345.000000000000000000
+      Size.Height = 97.000000000000000000
       Size.PlatformDefault = False
-      Text = 'Label2'
+      TabOrder = 1
+      Viewport.Width = 341.000000000000000000
+      Viewport.Height = 93.000000000000000000
     end
   end
   object OpenDialog1: TOpenDialog

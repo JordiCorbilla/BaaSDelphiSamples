@@ -35,7 +35,7 @@ uses
   FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
   lib.firebase.rest, DBXJSON, System.JSON, Data.DBXJSONCommon, lib.document, generics.collections,
-  FMX.Layouts, FMX.ListBox, FMX.WebBrowser, FMX.Ani;
+  FMX.Layouts, FMX.ListBox, FMX.WebBrowser, FMX.Ani, FMX.ScrollBox, FMX.Memo;
 
 type
   Tmain = class(TForm)
@@ -57,7 +57,7 @@ type
     Panel1: TPanel;
     Label1: TLabel;
     Button1: TButton;
-    Label2: TLabel;
+    Memo1: TMemo;
     procedure RefreshExecute(Sender: TObject);
     procedure ListBoxItem1Click(Sender: TObject);
     procedure UploadExecute(Sender: TObject);
@@ -113,7 +113,9 @@ begin
             TThread.Synchronize(nil,
             procedure
             begin
-              label2.Text := E.Message;
+              memo1.Visible := true;
+              memo1.lines.clear;
+              memo1.lines.add(E.Message);
             end
             );
           end;
@@ -239,8 +241,9 @@ end;
 
 procedure Tmain.FormCreate(Sender: TObject);
 begin
-  //IdOpenSSLSetLibPath(TPath.GetDocumentsPath);
-  label2.Text := '';
+  IdOpenSSLSetLibPath(TPath.GetDocumentsPath);
+  memo1.Lines.Clear;
+  memo1.Visible := false;
 end;
 
 procedure Tmain.ListBoxItem1Click(Sender: TObject);
