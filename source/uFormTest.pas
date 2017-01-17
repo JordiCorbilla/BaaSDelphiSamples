@@ -1,4 +1,4 @@
-// Copyright (c) 2016, Jordi Corbilla
+// Copyright (c) 2017, Jordi Corbilla
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -33,23 +33,32 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, lib.firebase.rest, DBXJSON,
   System.JSON, Data.DBXJSONCommon, lib.document, generics.collections,
-  Vcl.OleCtrls, SHDocVw;
+  Vcl.OleCtrls, SHDocVw, Vcl.ComCtrls;
 
 type
   TForm3 = class(TForm)
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
     Button1: TButton;
     Memo1: TMemo;
     Edit1: TEdit;
     Edit2: TEdit;
     Button2: TButton;
     AddFile: TButton;
-    OpenDialog1: TOpenDialog;
     Button3: TButton;
     Memo2: TMemo;
     Button4: TButton;
     ListBox1: TListBox;
     WebBrowser1: TWebBrowser;
     Button5: TButton;
+    OpenDialog1: TOpenDialog;
+    Edit3: TEdit;
+    Label1: TLabel;
+    Button6: TButton;
+    Edit4: TEdit;
+    Label2: TLabel;
+    Memo3: TMemo;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure AddFileClick(Sender: TObject);
@@ -57,6 +66,7 @@ type
     procedure Button4Click(Sender: TObject);
     procedure ListBox1DblClick(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
   private
     function LoadDocuments(jsonString: string): TList<IDocument>;
     { Private declarations }
@@ -261,6 +271,23 @@ procedure TForm3.Button5Click(Sender: TObject);
 begin
   WebBrowser1.Navigate2('file://c:/temp/TESTING FIREBASE 2.pdf');
  // WebBrowser1.Navigate('www.google.co.uk');
+end;
+
+procedure TForm3.Button6Click(Sender: TObject);
+var
+  firebase : IFirebaseRest;
+  result : string;
+begin
+  TThread.Synchronize(TThread.CurrentThread, procedure
+    begin
+      firebase := TFirebaseRest.New;
+      try
+        result := firebase.RegisterDeviceToken(edit3.Text, edit4.text);
+        memo3.Lines.Add(result);
+      finally
+
+      end;
+    end);
 end;
 
 end.

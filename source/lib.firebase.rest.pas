@@ -1,4 +1,4 @@
-// Copyright (c) 2016, Jordi Corbilla
+// Copyright (c) 2017, Jordi Corbilla
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -40,6 +40,7 @@ type
     function Add(jsonString: string) : boolean;
     function GetCollection() : string;
     function Delete() : boolean;
+    function RegisterDeviceToken(token: string; apiKey : string) : string;
   end;
 
   TFirebaseRest = class(TInterfacedObject, IFirebaseRest)
@@ -50,6 +51,7 @@ type
     function GetCollection() : string;
     function Delete() : boolean;
     constructor Create();
+    function RegisterDeviceToken(token: string; apiKey : string) : string;
     class function New() : IFirebaseRest;
   end;
 
@@ -174,6 +176,51 @@ end;
 class function TFirebaseRest.New: IFirebaseRest;
 begin
   result := Create;
+end;
+
+//Register device token example: https://developers.google.com/instance-id/reference/server
+//https://iid.googleapis.com/iid/v1:batchImport
+//{
+//  "application": "com.google.FCMTestApp",
+//  "sandbox":false,
+//  "apns_tokens":[
+//      "368dde283db539abc4a6419b1795b6131194703b816e4f624ffa12",
+//      "76b39c2b2ceaadee8400b8868c2f45325ab9831c1998ed70859d86"
+//   ]
+//  }
+//}
+function TFirebaseRest.RegisterDeviceToken(token, apiKey: string): string;
+var
+  IdHTTP: TIdHTTP;
+  IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
+  response : string;
+  jsonString : string;
+  JsonToSend: TStringStream;
+begin
+  try
+    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
+    IdIOHandler.ReadTimeout := IdTimeoutInfinite;
+    IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
+    IdHTTP := TIdHTTP.Create(nil);
+    try
+      IdHTTP.IOHandler := IdIOHandler;
+      IdHTTP.ReadTimeout := IdTimeoutInfinite;
+      IdHTTP.Request.Connection := 'Keep-Alive';
+      IdIOHandler.SSLOptions.Method := sslvSSLv23;
+      IdHTTP.Request.CustomHeaders.Clear;
+      IdHTTP.Request.CustomHeaders.Values['Authorization: key'] := apiKey;
+      IdHTTP.Request.ContentType := 'application/json';
+      jsonString := '{"application": "com.google.FCMTestApp","sandbox":false,"apns_tokens":["'+token+'"]}';
+      JsonToSend := TStringStream.Create(jsonString);
+      response := IdHTTP.Post('https://iid.googleapis.com/iid/v1:batchImport', JsonToSend);
+      response := response.Replace(Char(#10), '');
+      result := response;
+    finally
+      IdHTTP.Free;
+    end;
+  finally
+    IdIOHandler.Free;
+  end;
 end;
 
 end.
