@@ -18,6 +18,9 @@
         <Projects Include="CloudStreaming.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="FirebaseCloudMessaging.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -71,14 +74,23 @@
     <Target Name="CloudStreaming:Make">
         <MSBuild Projects="CloudStreaming.dproj" Targets="Make"/>
     </Target>
+    <Target Name="FirebaseCloudMessaging">
+        <MSBuild Projects="FirebaseCloudMessaging.dproj"/>
+    </Target>
+    <Target Name="FirebaseCloudMessaging:Clean">
+        <MSBuild Projects="FirebaseCloudMessaging.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FirebaseCloudMessaging:Make">
+        <MSBuild Projects="FirebaseCloudMessaging.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile;thundax_testproject;CloudStreaming"/>
+        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile;thundax_testproject;CloudStreaming;FirebaseCloudMessaging"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean;thundax_testproject:Clean;CloudStreaming:Clean"/>
+        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean;thundax_testproject:Clean;CloudStreaming:Clean;FirebaseCloudMessaging:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make;thundax_testproject:Make;CloudStreaming:Make"/>
+        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make;thundax_testproject:Make;CloudStreaming:Make;FirebaseCloudMessaging:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
