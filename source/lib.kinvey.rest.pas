@@ -81,7 +81,7 @@ begin
       IdHTTP.Request.CustomHeaders.Values['X-Kinvey-API-Version'] := '3';
       IdHTTP.Request.ContentType := 'application/json';
       response := IdHTTP.Post('https://baas.kinvey.com/appdata/'+FOptions.AppId+'/'+FOptions.Collection+'/', JsonToSend);
-      response := response.Replace(AnsiChar(#10), '');
+      response := response.Replace(Char(#10), '');
       result := (response.Contains('creator'));
     finally
       IdHTTP.Free;

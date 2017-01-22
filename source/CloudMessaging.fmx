@@ -6,7 +6,8 @@ object frmMain: TfrmMain
   FormFactor.Width = 1440
   FormFactor.Height = 900
   FormFactor.Devices = [Desktop]
-  DesignerMasterStyle = 0
+  OnCreate = FormCreate
+  DesignerMasterStyle = 3
   object Header: TToolBar
     Size.Width = 384.000000000000000000
     Size.Height = 48.000000000000000000
@@ -19,7 +20,7 @@ object frmMain: TfrmMain
       Size.PlatformDefault = False
       StyleLookup = 'toollabel'
       TextSettings.HorzAlign = Center
-      Text = 'Title'
+      Text = 'Firebase Cloud Messaging'
     end
   end
   object Footer: TToolBar
@@ -30,5 +31,56 @@ object frmMain: TfrmMain
     Size.PlatformDefault = False
     StyleLookup = 'bottomtoolbar'
     TabOrder = 1
+    object SpeedButton2: TSpeedButton
+      Align = MostLeft
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'infotoolbutton'
+      OnClick = ShowTokenExecute
+    end
+    object SpeedButton1: TSpeedButton
+      Align = MostLeft
+      Position.X = 48.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'nexttoolbutton'
+      OnClick = RegisterDeviceExecute
+    end
+  end
+  object Memo1: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    Align = Client
+    Size.Width = 384.000000000000000000
+    Size.Height = 471.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Viewport.Width = 376.000000000000000000
+    Viewport.Height = 463.000000000000000000
+  end
+  object ActionList1: TActionList
+    Left = 176
+    Top = 56
+    object TitleAction: TControlAction
+      Category = 'Tab'
+      Text = 'TitleAction'
+    end
+    object PreviousTabAction1: TPreviousTabAction
+      Category = 'Tab'
+      ShortCut = 137
+    end
+    object NextTabAction1: TNextTabAction
+      Category = 'Tab'
+    end
+    object ShowToken: TAction
+      Text = 'ShowToken'
+      OnExecute = ShowTokenExecute
+    end
+    object RegisterDevice: TAction
+      Text = 'RegisterDevice'
+      OnExecute = RegisterDeviceExecute
+    end
   end
 end

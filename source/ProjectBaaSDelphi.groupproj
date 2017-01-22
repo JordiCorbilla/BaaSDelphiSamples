@@ -19,7 +19,7 @@
             <Dependencies/>
         </Projects>
         <Projects Include="FirebaseCloudMessaging.dproj">
-            <Dependencies/>
+            <Dependencies>thundax.baas.providers.dproj</Dependencies>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -74,13 +74,13 @@
     <Target Name="CloudStreaming:Make">
         <MSBuild Projects="CloudStreaming.dproj" Targets="Make"/>
     </Target>
-    <Target Name="FirebaseCloudMessaging">
+    <Target Name="FirebaseCloudMessaging" DependsOnTargets="thundax.baas.providers">
         <MSBuild Projects="FirebaseCloudMessaging.dproj"/>
     </Target>
-    <Target Name="FirebaseCloudMessaging:Clean">
+    <Target Name="FirebaseCloudMessaging:Clean" DependsOnTargets="thundax.baas.providers:Clean">
         <MSBuild Projects="FirebaseCloudMessaging.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="FirebaseCloudMessaging:Make">
+    <Target Name="FirebaseCloudMessaging:Make" DependsOnTargets="thundax.baas.providers:Make">
         <MSBuild Projects="FirebaseCloudMessaging.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">

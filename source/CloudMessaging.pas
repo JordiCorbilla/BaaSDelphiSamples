@@ -30,19 +30,39 @@ unit CloudMessaging;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.SysUtils, System.Types, System.UITypes, System.Classes,
+  System.Variants,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Controls.Presentation;
+  FMX.Controls.Presentation, FMX.ActnList, FMX.TabControl, System.Actions, System.IOUtils,
+  FMX.ScrollBox, FMX.Memo, System.PushNotification, lib.firebase.rest, IdSSLOpenSSLHeaders
+  {$IFDEF ANDROID}
+    , FMX.PushNotification.android
+  {$ENDIF};
 
 type
   TfrmMain = class(TForm)
     Header: TToolBar;
     Footer: TToolBar;
     HeaderLabel: TLabel;
+    SpeedButton2: TSpeedButton;
+    ActionList1: TActionList;
+    TitleAction: TControlAction;
+    PreviousTabAction1: TPreviousTabAction;
+    NextTabAction1: TNextTabAction;
+    ShowToken: TAction;
+    Memo1: TMemo;
+    SpeedButton1: TSpeedButton;
+    RegisterDevice: TAction;
+    procedure ShowTokenExecute(Sender: TObject);
+    procedure RegisterDeviceExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
-    { Public declarations }
+    PushService: TPushService;
+    ServiceConnection: TPushServiceConnection;
+    DeviceId : string;
+    DeviceToken : string;
   end;
 
 var
@@ -51,5 +71,34 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+begin
+  IdOpenSSLSetLibPath(TPath.GetDocumentsPath);
+end;
+
+procedure TfrmMain.RegisterDeviceExecute(Sender: TObject);
+var
+  response : string;
+begin
+  //Register the device and get the token back
+  response := TFirebaseRest.New.RegisterDeviceToken(DeviceId,'xx');
+  Memo1.Lines.Add(response);
+end;
+
+procedure TfrmMain.ShowTokenExecute(Sender: TObject);
+begin
+{$IFDEF ANDROID}
+  PushService := TPushServiceManager.Instance.GetServiceByName(TPushService.TServiceNames.GCM);
+  PushService.AppProps[TPushService.TAppPropNames.GCMAppID] := 'FCM ID';
+{$ENDIF}
+  ServiceConnection := TPushServiceConnection.Create(PushService);
+  ServiceConnection.Active := True;
+
+  DeviceID := PushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceID];
+  DeviceToken := PushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken];
+  Memo1.Lines.Add('DeviceID: ' + DeviceID);
+  Memo1.Lines.Add('deviceToken: ' + deviceToken);
+end;
 
 end.
