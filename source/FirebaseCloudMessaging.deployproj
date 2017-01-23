@@ -4,7 +4,7 @@
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>
     <PropertyGroup>
-        <DeviceId Condition="'$(Platform)'=='Android'"/>
+        <DeviceId Condition="'$(Platform)'=='Android'">ZY223PNH2N</DeviceId>
     </PropertyGroup>
     <ItemGroup Condition="'$(Platform)'=='iOSDevice64'"/>
     <ItemGroup Condition="'$(Platform)'=='Win64'"/>
@@ -31,6 +31,15 @@
         </DeployFile>
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='Android'">
+        <DeployFile Include="AndroidOpenssl1.0.1t\libcrypto.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>FirebaseCloudMessaging\assets\internal\</RemoteDir>
+            <RemoteName>libcrypto.so</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="Android\Debug\libFirebaseCloudMessaging.so" Condition="'$(Config)'=='Debug'">
             <RemoteDir>FirebaseCloudMessaging\library\lib\armeabi-v7a\</RemoteDir>
             <RemoteName>libFirebaseCloudMessaging.so</RemoteName>
@@ -127,6 +136,15 @@
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon96</DeployClass>
             <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
+        <DeployFile Include="AndroidOpenssl1.0.1t\libssl.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>FirebaseCloudMessaging\assets\internal\</RemoteDir>
+            <RemoteName>libssl.so</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>

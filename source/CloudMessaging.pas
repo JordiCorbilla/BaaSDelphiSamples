@@ -82,16 +82,16 @@ var
   response : string;
 begin
   //Register the device and get the token back
-  response := TFirebaseRest.New.RegisterDeviceToken(DeviceId,'xx');
+  response := TFirebaseRest.New.RegisterDeviceToken(DeviceId,'AIzaSyBU8EU03Vm-sm65I9EjBHPFBjHwF9lerhg');
   Memo1.Lines.Add(response);
 end;
 
 procedure TfrmMain.ShowTokenExecute(Sender: TObject);
 begin
-{$IFDEF ANDROID}
-  PushService := TPushServiceManager.Instance.GetServiceByName(TPushService.TServiceNames.GCM);
-  PushService.AppProps[TPushService.TAppPropNames.GCMAppID] := 'FCM ID';
-{$ENDIF}
+  {$IFDEF ANDROID}
+    PushService := TPushServiceManager.Instance.GetServiceByName(TPushService.TServiceNames.GCM);
+    PushService.AppProps[TPushService.TAppPropNames.GCMAppID] := 'FCM ID';
+  {$ENDIF}
   ServiceConnection := TPushServiceConnection.Create(PushService);
   ServiceConnection.Active := True;
 

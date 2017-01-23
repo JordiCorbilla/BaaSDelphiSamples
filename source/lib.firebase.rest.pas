@@ -210,7 +210,7 @@ begin
       IdHTTP.Request.CustomHeaders.Clear;
       IdHTTP.Request.CustomHeaders.Values['Authorization: key'] := apiKey;
       IdHTTP.Request.ContentType := 'application/json';
-      jsonString := '{"application": "com.google.FCMDelphiTest","sandbox":false,"apns_tokens":["'+token+'"]}';
+      jsonString := '{"application": "com.embarcadero.FirebaseCloudMessaging", "sandbox":false, "apns_tokens":["'+token+'"]}';
       JsonToSend := TStringStream.Create(jsonString);
       response := IdHTTP.Post('https://iid.googleapis.com/iid/v1:batchImport', JsonToSend);
       response := response.Replace(Char(#10), '');
