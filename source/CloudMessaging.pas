@@ -31,13 +31,15 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes,
-  System.Variants,
+  System.Variants, System.Notification,
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Controls.Presentation, FMX.ActnList, FMX.TabControl, System.Actions, System.IOUtils,
-  FMX.ScrollBox, FMX.Memo, System.PushNotification, lib.firebase.rest, IdSSLOpenSSLHeaders
-  {$IFDEF ANDROID}
+  FMX.Controls.Presentation, FMX.ActnList, FMX.TabControl, System.Actions,
+  System.IOUtils,
+  FMX.ScrollBox, FMX.Memo, System.PushNotification, lib.firebase.rest,
+  IdSSLOpenSSLHeaders
+{$IFDEF ANDROID}
     , FMX.PushNotification.android
-  {$ENDIF};
+{$ENDIF};
 
 type
   TfrmMain = class(TForm)
@@ -57,12 +59,15 @@ type
     procedure RegisterDeviceExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
+    procedure OnReceiveNotificationEvent(Sender: TObject; const ServiceNotification: TPushServiceNotification);
+    procedure OnServiceConnectionChange(Sender: TObject; PushChanges: TPushService.TChanges);
+    procedure ShowAndroidNotification(MessageText: string; NotificationNumber: integer);
     { Private declarations }
   public
     PushService: TPushService;
     ServiceConnection: TPushServiceConnection;
-    DeviceId : string;
-    DeviceToken : string;
+    DeviceId: string;
+    DeviceToken: string;
   end;
 
 var
@@ -79,26 +84,79 @@ end;
 
 procedure TfrmMain.RegisterDeviceExecute(Sender: TObject);
 var
-  response : string;
+  response: string;
 begin
-  //Register the device and get the token back
-  response := TFirebaseRest.New.RegisterDeviceToken(DeviceId,'AIzaSyBU8EU03Vm-sm65I9EjBHPFBjHwF9lerhg');
+  // Register the device and get the token back
+  response := TFirebaseRest.New.RegisterDeviceToken(DeviceToken, 'xxxx');
   Memo1.Lines.Add(response);
 end;
 
 procedure TfrmMain.ShowTokenExecute(Sender: TObject);
 begin
-  {$IFDEF ANDROID}
-    PushService := TPushServiceManager.Instance.GetServiceByName(TPushService.TServiceNames.GCM);
-    PushService.AppProps[TPushService.TAppPropNames.GCMAppID] := 'FCM ID';
-  {$ENDIF}
+{$IFDEF ANDROID}
+  PushService := TPushServiceManager.Instance.GetServiceByName
+    (TPushService.TServiceNames.GCM);
+  PushService.AppProps[TPushService.TAppPropNames.GCMAppID] := 'xxxx';
+{$ENDIF}
   ServiceConnection := TPushServiceConnection.Create(PushService);
   ServiceConnection.Active := True;
+  ServiceConnection.OnChange := OnServiceConnectionChange;
+  ServiceConnection.OnReceiveNotification := OnReceiveNotificationEvent;
 
-  DeviceID := PushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceID];
-  DeviceToken := PushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken];
-  Memo1.Lines.Add('DeviceID: ' + DeviceID);
-  Memo1.Lines.Add('deviceToken: ' + deviceToken);
+  DeviceId := PushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceId];
+  DeviceToken := PushService.DeviceTokenValue
+    [TPushService.TDeviceTokenNames.DeviceToken];
+  Memo1.Lines.Add('DeviceID: ' + DeviceId);
+  Memo1.Lines.Add('deviceToken: ' + DeviceToken);
+end;
+
+procedure TfrmMain.OnServiceConnectionChange(Sender: TObject; PushChanges: TPushService.TChanges);
+begin
+  DeviceId := PushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceId];
+  DeviceToken := PushService.DeviceTokenValue
+    [TPushService.TDeviceTokenNames.DeviceToken];
+  Memo1.Lines.Add('DeviceID: ' + DeviceId);
+  Memo1.Lines.Add('deviceToken: ' + DeviceToken);
+end;
+
+procedure TfrmMain.OnReceiveNotificationEvent(Sender: TObject; const ServiceNotification: TPushServiceNotification);
+var
+  MessageText: string;
+begin
+  Memo1.Lines.Add('DataKey = ' + ServiceNotification.DataKey);
+  Memo1.Lines.Add('Json = ' + ServiceNotification.Json.ToString);
+  Memo1.Lines.Add('DataObject = ' + ServiceNotification.DataObject.ToString);
+{$IFDEF ANDROID}
+  MessageText := ANotification.DataObject.GetValue('gcm.notification.body').Value;
+{$ENDIF};
+
+  ShowAndroidNotification(MessageText, 0);
+end;
+
+procedure TfrmMain.ShowAndroidNotification(MessageText: string; NotificationNumber: integer);
+var
+  NotificationCenter: TNotificationCenter;
+  Notification: TNotification;
+begin
+
+  NotificationCenter := TNotificationCenter.Create(nil);
+  try
+    Notification := NotificationCenter.CreateNotification;
+    try
+      Notification.Name := MessageText;
+      Notification.AlertBody := MessageText;
+      Notification.Title := MessageText;
+      Notification.EnableSound := false;
+      Notification.Number := BadgeNumber;
+      NotificationCenter.ApplicationIconBadgeNumber := BadgeNumber;
+      NotificationCenter.PresentNotification(Notification);
+    finally
+      Notification.DisposeOf;
+    end;
+  finally
+    NotificationCenter.Free;
+    NotificationCenter.DisposeOf;
+  end;
 end;
 
 end.
