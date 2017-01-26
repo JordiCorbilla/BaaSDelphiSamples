@@ -52,10 +52,16 @@ object frmMain: TfrmMain
   object Memo1: TMemo
     Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
     DataDetectorTypes = []
+    StyledSettings = [Style, Other]
+    TextSettings.Font.Family = 'Calibri'
+    TextSettings.Font.Size = 10.000000000000000000
+    TextSettings.WordWrap = True
     Align = Client
+    ControlType = Platform
     Size.Width = 384.000000000000000000
     Size.Height = 471.000000000000000000
     Size.PlatformDefault = False
+    StyleLookup = 'memostyle'
     TabOrder = 3
     Viewport.Width = 376.000000000000000000
     Viewport.Height = 463.000000000000000000
@@ -82,5 +88,10 @@ object frmMain: TfrmMain
       Text = 'RegisterDevice'
       OnExecute = RegisterDeviceExecute
     end
+  end
+  object StyleBook1: TStyleBook
+    Styles = <>
+    Left = 216
+    Top = 256
   end
 end

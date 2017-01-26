@@ -55,6 +55,7 @@ type
     Memo1: TMemo;
     SpeedButton1: TSpeedButton;
     RegisterDevice: TAction;
+    StyleBook1: TStyleBook;
     procedure ShowTokenExecute(Sender: TObject);
     procedure RegisterDeviceExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -94,8 +95,7 @@ end;
 procedure TfrmMain.ShowTokenExecute(Sender: TObject);
 begin
 {$IFDEF ANDROID}
-  PushService := TPushServiceManager.Instance.GetServiceByName
-    (TPushService.TServiceNames.GCM);
+  PushService := TPushServiceManager.Instance.GetServiceByName(TPushService.TServiceNames.GCM);
   PushService.AppProps[TPushService.TAppPropNames.GCMAppID] := 'xxxx';
 {$ENDIF}
   ServiceConnection := TPushServiceConnection.Create(PushService);
@@ -104,32 +104,31 @@ begin
   ServiceConnection.OnReceiveNotification := OnReceiveNotificationEvent;
 
   DeviceId := PushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceId];
-  DeviceToken := PushService.DeviceTokenValue
-    [TPushService.TDeviceTokenNames.DeviceToken];
+  DeviceToken := PushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken];
   Memo1.Lines.Add('DeviceID: ' + DeviceId);
-  Memo1.Lines.Add('deviceToken: ' + DeviceToken);
+  Memo1.Lines.Add('FCM Token: ' + DeviceToken);
+  Memo1.Lines.Add('Ready to receive!');
 end;
 
 procedure TfrmMain.OnServiceConnectionChange(Sender: TObject; PushChanges: TPushService.TChanges);
 begin
   DeviceId := PushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceId];
-  DeviceToken := PushService.DeviceTokenValue
-    [TPushService.TDeviceTokenNames.DeviceToken];
-  Memo1.Lines.Add('DeviceID: ' + DeviceId);
-  Memo1.Lines.Add('deviceToken: ' + DeviceToken);
+  DeviceToken := PushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken];
+  Memo1.Lines.Add(DateTimeToStr(Now) + ' DeviceID: ' + DeviceId);
+  Memo1.Lines.Add(DateTimeToStr(Now) + ' FCM Token: ' + DeviceToken);
 end;
 
 procedure TfrmMain.OnReceiveNotificationEvent(Sender: TObject; const ServiceNotification: TPushServiceNotification);
 var
   MessageText: string;
 begin
-  Memo1.Lines.Add('DataKey = ' + ServiceNotification.DataKey);
-  Memo1.Lines.Add('Json = ' + ServiceNotification.Json.ToString);
-  Memo1.Lines.Add('DataObject = ' + ServiceNotification.DataObject.ToString);
+  Memo1.Lines.Add(DateTimeToStr(Now) + ' DataKey = ' + ServiceNotification.DataKey);
+  Memo1.Lines.Add(DateTimeToStr(Now) + ' Json = ' + ServiceNotification.Json.ToString);
+  Memo1.Lines.Add(DateTimeToStr(Now) + ' DataObject = ' + ServiceNotification.DataObject.ToString);
 {$IFDEF ANDROID}
-  MessageText := ANotification.DataObject.GetValue('gcm.notification.body').Value;
+  MessageText := ServiceNotification.DataObject.GetValue('gcm.notification.body').Value;
 {$ENDIF};
-
+  Memo1.Lines.Add(DateTimeToStr(Now) + ' Message = ' + MessageText);
   ShowAndroidNotification(MessageText, 0);
 end;
 
@@ -138,7 +137,6 @@ var
   NotificationCenter: TNotificationCenter;
   Notification: TNotification;
 begin
-
   NotificationCenter := TNotificationCenter.Create(nil);
   try
     Notification := NotificationCenter.CreateNotification;
@@ -147,8 +145,8 @@ begin
       Notification.AlertBody := MessageText;
       Notification.Title := MessageText;
       Notification.EnableSound := false;
-      Notification.Number := BadgeNumber;
-      NotificationCenter.ApplicationIconBadgeNumber := BadgeNumber;
+      Notification.Number := NotificationNumber;
+      NotificationCenter.ApplicationIconBadgeNumber := NotificationNumber;
       NotificationCenter.PresentNotification(Notification);
     finally
       Notification.DisposeOf;
