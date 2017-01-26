@@ -57,7 +57,6 @@ object frmMain: TfrmMain
     TextSettings.Font.Size = 10.000000000000000000
     TextSettings.WordWrap = True
     Align = Client
-    ControlType = Platform
     Size.Width = 384.000000000000000000
     Size.Height = 471.000000000000000000
     Size.PlatformDefault = False

@@ -96,7 +96,7 @@ procedure TfrmMain.ShowTokenExecute(Sender: TObject);
 begin
 {$IFDEF ANDROID}
   PushService := TPushServiceManager.Instance.GetServiceByName(TPushService.TServiceNames.GCM);
-  PushService.AppProps[TPushService.TAppPropNames.GCMAppID] := 'sender Id';
+  PushService.AppProps[TPushService.TAppPropNames.GCMAppID] := '';
 {$ENDIF}
   ServiceConnection := TPushServiceConnection.Create(PushService);
   ServiceConnection.Active := True;
@@ -105,9 +105,9 @@ begin
 
   DeviceId := PushService.DeviceIDValue[TPushService.TDeviceIDNames.DeviceId];
   DeviceToken := PushService.DeviceTokenValue[TPushService.TDeviceTokenNames.DeviceToken];
-  Memo1.Lines.Add(DateTimeToStr(Now) + 'DeviceID: ' + DeviceId);
-  Memo1.Lines.Add(DateTimeToStr(Now) + 'FCM Token: ' + DeviceToken);
-  Memo1.Lines.Add(DateTimeToStr(Now) + 'Ready to receive!');
+  Memo1.Lines.Add(DateTimeToStr(Now) + ' DeviceID: ' + DeviceId);
+  Memo1.Lines.Add(DateTimeToStr(Now) + ' FCM Token: ' + DeviceToken);
+  Memo1.Lines.Add(DateTimeToStr(Now) + ' Ready to receive!');
 end;
 
 procedure TfrmMain.OnServiceConnectionChange(Sender: TObject; PushChanges: TPushService.TChanges);
