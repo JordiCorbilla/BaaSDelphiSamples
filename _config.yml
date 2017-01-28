@@ -1,0 +1,8 @@
+title: Baasdelphisamples
+description: Code samples for BaaS and PaaS using Delphi
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-minimal
+
+gems:
+  - jekyll-mentions
