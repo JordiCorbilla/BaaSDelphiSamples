@@ -18,6 +18,7 @@ Code samples for **BaaS ([Kinvey](https://www.kinvey.com/))**, **BaaS ([Firebase
     - [Creating your own self-hosted Parse server](http://thundaxsoftware.blogspot.co.uk/2016/05/creating-your-own-self-hosted-parse.html)
   - **Firebase**:
     - [Firebase file streaming with Delphi](http://thundaxsoftware.blogspot.co.uk/2016/11/firebase-file-streaming-with-delphi.html)
+    - [Firebase Cloud Messaging with Delphi](http://thundaxsoftware.blogspot.co.uk/2017/01/firebase-cloud-messaging-with-delphi.html)    
 
 **Win64 example app using Kinvey**
 
