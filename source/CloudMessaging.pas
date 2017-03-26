@@ -96,7 +96,7 @@ procedure TfrmMain.ShowTokenExecute(Sender: TObject);
 begin
 {$IFDEF ANDROID}
   PushService := TPushServiceManager.Instance.GetServiceByName(TPushService.TServiceNames.GCM);
-  PushService.AppProps[TPushService.TAppPropNames.GCMAppID] := '';
+  PushService.AppProps[TPushService.TAppPropNames.GCMAppID] := '41271381247';
 {$ENDIF}
   ServiceConnection := TPushServiceConnection.Create(PushService);
   ServiceConnection.Active := True;

@@ -58,6 +58,9 @@ type
     lblUser: TLabel;
     lblPassword: TLabel;
     lblUrl: TLabel;
+    BackendStorage1: TBackendStorage;
+    KinveyProvider1: TKinveyProvider;
+    BackendQuery1: TBackendQuery;
     procedure btnRefreshClick(Sender: TObject);
     procedure ListView1ItemClick(const Sender: TObject; const AItem: TListViewItem);
     procedure btnAddClick(Sender: TObject);

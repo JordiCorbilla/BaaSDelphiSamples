@@ -3,13 +3,23 @@ inherited Form2_LgXhdpiTb: TForm2_LgXhdpiTb
   ClientWidth = 480
   DesignerMasterStyle = 3
   inherited TabControl1: TTabControl
+    Sizes = (
+      329s
+      368s
+      329s
+      368s)
     inherited tabCloud: TTabItem
+      Size.Width = 164.000000000000000000
       ExplicitSize.cx = 200.000000000000000000
       ExplicitSize.cy = 49.000000000000000000
     end
     inherited tabDetails: TTabItem
+      Size.Width = 165.000000000000000000
       ExplicitSize.cx = 100.000000000000000000
       ExplicitSize.cy = 49.000000000000000000
     end
+  end
+  inherited BackendStorage1: TBackendStorage
+    Provider = nil
   end
 end
