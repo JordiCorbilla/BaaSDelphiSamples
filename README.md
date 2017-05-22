@@ -7,7 +7,7 @@
 ![](https://3.bp.blogspot.com/-R9V-4Cq47sI/WDqsB6Lbk0I/AAAAAAAAF1Q/DQP6AkGaJxstXBpLLN-6jiVgU2AkkoXYgCLcB/s1600/firebasediagram.png)
 
 
-Code samples for **BaaS ([Kinvey](https://www.kinvey.com/))**, **BaaS ([Firebase](https://firebase.google.com/))** and **PaaS ([Parse.com](http://parse.com/))** using Delphi 10.1 Berlin Update 2 and [Indy Library](http://www.indyproject.org/index.en.aspx)
+Code samples for **BaaS ([Kinvey](https://www.kinvey.com/))**, **BaaS ([Firebase](https://firebase.google.com/))** and **PaaS ([Parse.com](http://parse.com/))** using Delphi 10.2 Tokyo and [Indy Library](http://www.indyproject.org/index.en.aspx)
 --------------
 **Related Articles:**
   - **Kinvey**:
