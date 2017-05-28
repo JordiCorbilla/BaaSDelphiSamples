@@ -30,7 +30,7 @@ unit lib.firebase.rest;
 interface
 
 uses
-  lib.urls, IdHTTP, IdIOHandler, IdIOHandlerStream,
+  IdHTTP, IdIOHandler, IdIOHandlerStream,
   IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdGlobal,
   System.SysUtils, System.Variants, System.Classes, lib.options,
   IdSSLOpenSSLHeaders_Static, System.IOUtils;
@@ -70,8 +70,8 @@ var
   JsonToSend: TStringStream;
 begin
   JsonToSend := TStringStream.Create(jsonString);
+  IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
   try
-    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
     IdIOHandler.ReadTimeout := IdTimeoutInfinite;
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
     IdHTTP := TIdHTTP.Create(nil);
@@ -113,8 +113,8 @@ var
   JsonToSend: TStringStream;
 begin
   JsonToSend := TStringStream.Create('');
+  IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
   try
-    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
     IdIOHandler.ReadTimeout := IdTimeoutInfinite;
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
     IdHTTP := TIdHTTP.Create(nil);
@@ -149,8 +149,8 @@ var
   IdIOHandler: TIdSSLIOHandlerSocketOpenSSL;
   response : string;
 begin
+  IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
   try
-    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
     IdIOHandler.ReadTimeout := IdTimeoutInfinite;
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
     IdHTTP := TIdHTTP.Create(nil);
@@ -197,8 +197,8 @@ var
   jsonString : string;
   JsonToSend: TStringStream;
 begin
+  IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
   try
-    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
     IdIOHandler.ReadTimeout := IdTimeoutInfinite;
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
     IdHTTP := TIdHTTP.Create(nil);

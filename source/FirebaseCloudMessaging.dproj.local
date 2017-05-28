@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2017/01/17 21:19:55.000.016,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterApplication.dproj=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\FirebaseCloudMessaging.dproj</Transaction>
-    <Transaction>2017/01/17 21:20:06.000.326,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterTemplate.fmx=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\CloudMessaging.fmx</Transaction>
-    <Transaction>2017/01/17 21:20:06.000.326,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterTemplate.pas=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\CloudMessaging.pas</Transaction>
+    <Transaction>2017/01/17 21:19:55.000.016,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\FirebaseCloudMessaging.dproj=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterApplication.dproj</Transaction>
+    <Transaction>2017/01/17 21:20:06.000.326,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\CloudMessaging.fmx=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterTemplate.fmx</Transaction>
+    <Transaction>2017/01/17 21:20:06.000.326,C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\CloudMessaging.pas=C:\Users\thund\Source\Repos\BaaSDelphiSamples\source\HeaderFooterTemplate.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile Android="ZY223PNH2N"/>

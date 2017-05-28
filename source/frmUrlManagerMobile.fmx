@@ -53,7 +53,7 @@ object Form2: TForm2
         item
         end>
       IsSelected = True
-      Size.Width = 163.000000000000000000
+      Size.Width = 78.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''
@@ -79,7 +79,7 @@ object Form2: TForm2
         item
         end>
       IsSelected = False
-      Size.Width = 164.000000000000000000
+      Size.Width = 56.000000000000000000
       Size.Height = 49.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = ''

@@ -30,7 +30,7 @@ unit lib.kinvey.rest;
 interface
 
 uses
-  lib.urls, IdHTTP, IdIOHandler, IdIOHandlerStream,
+  IdHTTP, IdIOHandler, IdIOHandlerStream,
   IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdGlobal,
   System.SysUtils, System.Variants, System.Classes, lib.options;
 
@@ -66,8 +66,8 @@ var
   encodedHeader : string;
 begin
   JsonToSend := TStringStream.Create(jsonString);
+  IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
   try
-    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
     IdIOHandler.ReadTimeout := IdTimeoutInfinite;
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
     IdHTTP := TIdHTTP.Create(nil);
@@ -104,8 +104,8 @@ var
   response : string;
   encodedHeader : string;
 begin
+  IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
   try
-    IdIOHandler := TIdSSLIOHandlerSocketOpenSSL.Create(nil);
     IdIOHandler.ReadTimeout := IdTimeoutInfinite;
     IdIOHandler.ConnectTimeout := IdTimeoutInfinite;
     IdHTTP := TIdHTTP.Create(nil);

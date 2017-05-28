@@ -91,9 +91,9 @@ var
   list: TList<TUrls>;
   url: TUrls;
 begin
+  list := TList<TUrls>.Create;
   try
     FBackendList := CreateUrlsList(BackendStorage1.Provider.ProviderID, BackendStorage1.Storage);
-    list := TList<TUrls>.Create;
     try
       for url in FBackendList do
         list.Add(url);

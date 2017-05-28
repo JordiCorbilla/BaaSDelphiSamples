@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- BEGIN_INCLUDE(manifest) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.embarcadero.urlManagerMobile"
+        package="com.embarcadero.FirebaseCloudMessaging"
         android:versionCode="1"
         android:versionName="1.0.0"
-        android:installLocation="auto">
+        android:installLocation="preferExternal">
 
     <!-- This is the platform API where NativeActivity was introduced. -->
     <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="14" />
@@ -18,12 +18,17 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <permission android:name="com.embarcadero.FirebaseCloudMessaging.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.embarcadero.FirebaseCloudMessaging.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-feature android:glEsVersion="0x00020000" android:required="True"/>
     <application android:persistent="False" 
         android:restoreAnyVersion="False" 
-        android:label="urlManagerMobile" 
+        android:label="FirebaseCloudMessaging" 
         android:debuggable="True" 
         android:largeHeap="False"
         android:icon="@drawable/ic_launcher"
@@ -35,12 +40,12 @@
         <!-- Our activity is a subclass of the built-in NativeActivity framework class.
              This will take care of integrating with our NDK code. -->
         <activity android:name="com.embarcadero.firemonkey.FMXNativeActivity"
-                android:label="urlManagerMobile"
+                android:label="FirebaseCloudMessaging"
                 android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
                 android:launchMode="singleTask">
             <!-- Tell NativeActivity the name of our .so -->
             <meta-data android:name="android.app.lib_name"
-                android:value="urlManagerMobile" />
+                android:value="FirebaseCloudMessaging" />
             <intent-filter>  
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -48,6 +53,12 @@
         </activity>
         
         <receiver android:name="com.embarcadero.rtl.notifications.NotificationAlarm" />
+<receiver android:exported="true" android:name="com.embarcadero.gcm.notifications.GCMNotification" android:permission="com.google.android.c2dm.permission.SEND">
+<intent-filter>
+<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+<category android:name="com.embarcadero.FirebaseCloudMessaging" />
+</intent-filter>
+</receiver>
 
           <service android:name="com.embarcadero.gcm.notifications.GCMIntentService" />
     </application>

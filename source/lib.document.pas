@@ -100,10 +100,10 @@ var
   Stream : TStream;
   buf: TBytes;
 begin
+  jsonArray := TJSONObject.ParseJSONValue(FDocument) as TJSONArray;
+  fs := TFileStream.Create('c:\temp\' + FFileName, fmCreate);
+  Stream := TDBXJSONTools.JSONToStream(jsonArray);
   try
-    jsonArray := TJSONObject.ParseJSONValue(FDocument) as TJSONArray;
-    fs := TFileStream.Create('c:\temp\' + FFileName, fmCreate);
-    Stream := TDBXJSONTools.JSONToStream(jsonArray);
     SetLength(buf, Stream.Size);
     Stream.Position := 0;
     Stream.ReadBuffer(buf[0], Stream.Size);
@@ -121,10 +121,10 @@ var
   Stream : TStream;
   buf: TBytes;
 begin
+  jsonArray := TJSONObject.ParseJSONValue(FDocument) as TJSONArray;
+  fs := TFileStream.Create(path + FFileName, fmCreate);
+  Stream := TDBXJSONTools.JSONToStream(jsonArray);
   try
-    jsonArray := TJSONObject.ParseJSONValue(FDocument) as TJSONArray;
-    fs := TFileStream.Create(path + FFileName, fmCreate);
-    Stream := TDBXJSONTools.JSONToStream(jsonArray);
     SetLength(buf, Stream.Size);
     Stream.Position := 0;
     Stream.ReadBuffer(buf[0], Stream.Size);
