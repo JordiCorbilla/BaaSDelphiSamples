@@ -22,7 +22,7 @@
             <Dependencies>thundax.baas.providers.dproj</Dependencies>
         </Projects>
         <Projects Include="COCApiTest.dproj">
-            <Dependencies/>
+            <Dependencies>thundax.baas.providers.dproj</Dependencies>
         </Projects>
     </ItemGroup>
     <ProjectExtensions>
@@ -86,13 +86,13 @@
     <Target Name="FirebaseCloudMessaging:Make" DependsOnTargets="thundax.baas.providers:Make">
         <MSBuild Projects="FirebaseCloudMessaging.dproj" Targets="Make"/>
     </Target>
-    <Target Name="COCApiTest">
+    <Target Name="COCApiTest" DependsOnTargets="thundax.baas.providers">
         <MSBuild Projects="COCApiTest.dproj"/>
     </Target>
-    <Target Name="COCApiTest:Clean">
+    <Target Name="COCApiTest:Clean" DependsOnTargets="thundax.baas.providers:Clean">
         <MSBuild Projects="COCApiTest.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="COCApiTest:Make">
+    <Target Name="COCApiTest:Make" DependsOnTargets="thundax.baas.providers:Make">
         <MSBuild Projects="COCApiTest.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">

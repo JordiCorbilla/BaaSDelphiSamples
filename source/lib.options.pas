@@ -43,10 +43,13 @@ type
     function Load() : IOptions;
     function GetFirebaseAuth() : string;
     procedure SetFirebaseAuth(const Value : string);
+    procedure SetCOCToken(const Value: string);
+    function GetCOCToken() : string;
     property AppId : string read GetAppId write SetAppId;
     property MasterSecret : string read GetMasterSecret write SetMasterSecret;
     property Collection : string read GetCollection write SetCollection;
     property FirebaseAuth : string read GetFirebaseAuth write SetFirebaseAuth;
+    property COCToken : string read GetCOCToken write SetCOCToken;
   end;
 
   TOptions = class(TInterfacedObject, IOptions)
@@ -55,6 +58,7 @@ type
     FMasterSecret: string;
     FCollection: string;
     FFirebaseAuth : string;
+    FCOCToken: string;
     procedure SetAppId(const Value: string);
     procedure SetMasterSecret(const Value: string);
     function GetAppId() : string;
@@ -63,11 +67,14 @@ type
     function GetCollection() : string;
     function GetFirebaseAuth() : string;
     procedure SetFirebaseAuth(const Value : string);
+    procedure SetCOCToken(const Value: string);
+    function GetCOCToken() : string;
   public
     property AppId : string read GetAppId write SetAppId;
     property MasterSecret : string read GetMasterSecret write SetMasterSecret;
     property Collection : string read GetCollection write SetCollection;
     property FirebaseAuth : string read GetFirebaseAuth write SetFirebaseAuth;
+    property COCToken : string read GetCOCToken write SetCOCToken;
     class function New(): IOptions;
     function Load() : IOptions;
   end;
@@ -82,6 +89,11 @@ uses
 function TOptions.GetAppId: string;
 begin
   result := FAppId;
+end;
+
+function TOptions.GetCOCToken: string;
+begin
+  result := FCOCToken;
 end;
 
 function TOptions.GetCollection: string;
@@ -109,6 +121,7 @@ begin
     FMasterSecret := inifile.ReadString('Kinvey', 'MasterSecret', '');
     FCollection := inifile.ReadString('Kinvey', 'Collection', '');
     FFirebaseAuth := inifile.ReadString('Firebase', 'Auth', '');
+    FCOCToken := inifile.ReadString('COC', 'token', '');
   finally
     inifile.Free;
   end;
@@ -123,6 +136,11 @@ end;
 procedure TOptions.SetAppId(const Value: string);
 begin
   FAppId := Value;
+end;
+
+procedure TOptions.SetCOCToken(const Value: string);
+begin
+  FCOCToken := Value;
 end;
 
 procedure TOptions.SetCollection(const Value: string);
