@@ -21,6 +21,9 @@
         <Projects Include="FirebaseCloudMessaging.dproj">
             <Dependencies>thundax.baas.providers.dproj</Dependencies>
         </Projects>
+        <Projects Include="COCApiTest.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -83,14 +86,23 @@
     <Target Name="FirebaseCloudMessaging:Make" DependsOnTargets="thundax.baas.providers:Make">
         <MSBuild Projects="FirebaseCloudMessaging.dproj" Targets="Make"/>
     </Target>
+    <Target Name="COCApiTest">
+        <MSBuild Projects="COCApiTest.dproj"/>
+    </Target>
+    <Target Name="COCApiTest:Clean">
+        <MSBuild Projects="COCApiTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="COCApiTest:Make">
+        <MSBuild Projects="COCApiTest.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile;thundax_testproject;CloudStreaming;FirebaseCloudMessaging"/>
+        <CallTarget Targets="thundax_baas_providers;urlManager;urlManagerMobile;thundax_testproject;CloudStreaming;FirebaseCloudMessaging;COCApiTest"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean;thundax_testproject:Clean;CloudStreaming:Clean;FirebaseCloudMessaging:Clean"/>
+        <CallTarget Targets="thundax_baas_providers:Clean;urlManager:Clean;urlManagerMobile:Clean;thundax_testproject:Clean;CloudStreaming:Clean;FirebaseCloudMessaging:Clean;COCApiTest:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make;thundax_testproject:Make;CloudStreaming:Make;FirebaseCloudMessaging:Make"/>
+        <CallTarget Targets="thundax_baas_providers:Make;urlManager:Make;urlManagerMobile:Make;thundax_testproject:Make;CloudStreaming:Make;FirebaseCloudMessaging:Make;COCApiTest:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
