@@ -1,7 +1,7 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <ProjectGuid>{E7638AC0-82BF-46ED-B5B0-B2A2C2CD4531}</ProjectGuid>
-        <ProjectVersion>18.2</ProjectVersion>
+        <ProjectVersion>18.3</ProjectVersion>
         <FrameworkType>FMX</FrameworkType>
         <MainSource>CloudStreaming.dpr</MainSource>
         <Base>True</Base>

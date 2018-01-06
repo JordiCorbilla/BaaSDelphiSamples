@@ -2,7 +2,7 @@
     <PropertyGroup>
         <ProjectGuid>{6DE0A184-9893-4B66-8807-6095DCFDF7FF}</ProjectGuid>
         <MainSource>thundax.baas.providers.dpk</MainSource>
-        <ProjectVersion>18.2</ProjectVersion>
+        <ProjectVersion>18.3</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
