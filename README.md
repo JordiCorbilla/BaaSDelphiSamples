@@ -18,7 +18,8 @@ Code samples for **BaaS ([Kinvey](https://www.kinvey.com/))**, **BaaS ([Firebase
     - [Creating your own self-hosted Parse server](http://thundaxsoftware.blogspot.co.uk/2016/05/creating-your-own-self-hosted-parse.html)
   - **Firebase**:
     - [Firebase file streaming with Delphi](http://thundaxsoftware.blogspot.co.uk/2016/11/firebase-file-streaming-with-delphi.html)
-    - [Firebase Cloud Messaging with Delphi](http://thundaxsoftware.blogspot.co.uk/2017/01/firebase-cloud-messaging-with-delphi.html)    
+    - [Firebase Cloud Messaging with Delphi](http://thundaxsoftware.blogspot.co.uk/2017/01/firebase-cloud-messaging-with-delphi.html)     - **Additional Notes**:
+    Note that this has not been tested against any other version of Delphi and I have users that reported the issue with Firebase not returning the token. I will look into it soon and update the documentation.
 
 **Win64 example app using Kinvey**
 
